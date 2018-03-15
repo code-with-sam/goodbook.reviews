@@ -1,3 +1,64 @@
+@import url('https://fonts.googleapis.com/css?family=Rubik');
+
+.landing__title {
+  font-family: 'Rubik', sans-serif;
+  /*text-transform: uppercase;*/
+  text-align: center;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+.gallery__wrapper {
+  background-color: #f6f6f7;
+  border-top: solid 2px #e1e1e1;
+  min-height: 100vh;
+}
+
+.sidebar {
+  float: left;
+  width: 15%;
+  padding: 0 25px;
+}
+.sidebar__divider {
+  border-color: #e1e1e1;
+}
+.sidebar__subtitle{
+  font-size: 0.8rem;
+  color: #afafaf;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+}
+.sidebar__list {
+  list-style: none;
+  padding: 0;
+}
+.sidebar__list-item {
+  color: #575757;
+  padding: 4px 4px 4px 32px;
+  position: relative;
+  font-size: 0.95rem;
+}
+.sidebar__list-item img {
+  width: 20px;
+  position: absolute;
+  top: 5px;
+  left: 6px;
+}
+.sidebar__list-item.is-active {
+  background-color: #e7e7e7;
+  border-radius: 4px;
+}
+
+.gallery {
+  float: left;
+  width: 80%;
+  /*box-shadow: 0 0 30px rgba(0,0,0,0.1);*/
+  /*background-color: #f5f7fa;*/
+  /*border-top: solid 2px #e1e1e1;*/
+}
+.gallery__title {
+  margin: 0 0 20px 20px ;
+}
 
 * {
   box-sizing: border-box;

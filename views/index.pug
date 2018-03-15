@@ -1,3 +1,52 @@
 extends layout
 
 block content
+
+  header
+    .container
+      //- h1.landing__title What Should You Read Next?
+      p GoodBook. reviews
+
+  main.gallery__wrapper.clearfix
+    aside.sidebar
+      h2.sidebar__subtitle Discover
+
+      ul.sidebar__list
+        li.sidebar__list-item
+          img(src="/img/latest-icon.png")
+          span Latest
+        li.sidebar__list-item.is-active
+          img(src="/img/featured-icon.png")
+          span Featured
+        li.sidebar__list-item
+          img(src="/img/trending-icon.png")
+          span Trending
+        li.sidebar__list-item
+          img(src="/img/feed-icon.png")
+          span Feed
+
+      hr.sidebar__divider
+
+      h2.sidebar__subtitle Genres
+      ul.sidebar__list
+        li.sidebar__list-item
+          img(src="/img/genre-fantasy-icon.png")
+          span Fantasy
+        li.sidebar__list-item
+          img(src="/img/genre-thriller-icon.png")
+          span Thriller
+        li.sidebar__list-item
+          img(src="/img/genre-science-fiction-icon.png")
+          span Science Fiction
+        li.sidebar__list-item
+          img(src="/img/genre-mystery-icon.png")
+          span Mystery
+        li.sidebar__list-item
+          img(src="/img/genre-sports-icon.png")
+          span Sports
+        li.sidebar__list-item
+          img(src="/img/genre-history-icon.png")
+          span Classics
+        li.sidebar__list-item
+          img(src="/img/genre-business-icon.png")
+          span Business
