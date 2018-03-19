@@ -1,5 +1,28 @@
 @import url('https://fonts.googleapis.com/css?family=Rubik');
 
+header {
+  padding: 6px 0;
+}
+.logo {
+  width: 130px;
+  margin-left: 20px;
+}
+.meta {
+  float: right;
+  padding: 6px 15px;;
+}
+.meta p {
+  float: left;
+  padding: 3px 10px;
+  font-size: 0.8rem;
+  color: #575757;
+}
+.profile {
+  float: left;
+  width: 25px;
+  border-radius: 50%;
+  border: solid 2px #ccc;
+}
 .landing__title {
   font-family: 'Rubik', sans-serif;
   /*text-transform: uppercase;*/

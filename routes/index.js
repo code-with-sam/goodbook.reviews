@@ -6,7 +6,7 @@ router.get('/', (req, res, next) =>  {
   if(req.session.steemconnect){
     res.redirect('/dashboard')
   } else {
-    res.render('index', { title: 'SteemConnect V2 Boilerplate' });
+    res.render('index', { title: 'GoodBook.Reviews' });
   }
 });
 
