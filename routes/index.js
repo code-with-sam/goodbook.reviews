@@ -4,7 +4,18 @@ let router = express.Router();
 /* GET home page. */
 router.get('/', (req, res, next) =>  {
   if(req.session.steemconnect){
-    res.redirect('/dashboard')
+    let userMetadata = {};
+    if (req.session.steemconnect.json_metadata == '' || req.session.steemconnect.json_metadata === undefined) {
+      userMetadata.profile = { about: ''}
+    } else {
+      userMetadata = JSON.parse(req.session.steemconnect.json_metadata)
+    }
+    res.render('index', {
+      auth: true,
+      title: 'GoodBook.Reviews',
+      name: req.session.steemconnect.name,
+      profileImage: userMetadata.profile.profile_image
+    });
   } else {
     res.render('index', { title: 'GoodBook.Reviews' });
   }
@@ -18,15 +29,23 @@ router.get('/@:username?', (req, res, next) => {
       });
 });
 
-router.get('/:category/@:username/:permlink', (req, res, next) => {
-      let category = req.params.category
-      let username = req.params.username
-      let permlink = req.params.permlink
+router.get('/review/:slug', (req, res) => {
+      let slug = req.params.slug
       res.render('single', {
-        category: category,
-        username: username,
-        permlink: permlink
+        slug: slug
       });
 });
+
+
+// router.get('/:category/@:username/:permlink', (req, res, next) => {
+//       let category = req.params.category
+//       let username = req.params.username
+//       let permlink = req.params.permlink
+//       res.render('single', {
+//         category: category,
+//         username: username,
+//         permlink: permlink
+//       });
+// });
 
 module.exports = router;
