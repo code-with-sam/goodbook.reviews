@@ -1,11 +1,14 @@
 let allUsers = []
 let allContent = []
 let converter = new showdown.Converter({ tables: true })
+const APP_TAG = 'book-review' //goodbook-review
+const USERNAME = 'sambillingham' // get from template
 
 function getTrending(query, initial){
   steem.api.getDiscussionsByTrending(query, (err, result) => {
     if (err === null) {
       displayContent(result,initial)
+      console.log(result)
       getaccounts(result.map(post => post.author))
     } else {
       console.log(err);
@@ -17,6 +20,7 @@ function getLatest(query, initial){
 
   steem.api.getDiscussionsByCreated(query, (err, result) => {
     if (err === null) {
+      console.log(result)
       displayContent(result, initial)
       getaccounts(result.map(post => post.author))
     } else {
@@ -28,8 +32,7 @@ function getLatest(query, initial){
 function getMoreContent(filter, tag){
   let lastItem = allContent[allContent.length - 1]
   let query = {
-      'tag':
-      tag,
+      'tag': tag,
       'limit': 24,
       start_author: lastItem.author,
       start_permlink: lastItem.permlink }
@@ -52,19 +55,28 @@ function getBlog(username){
 }
 
 function getUserFeed(username){
+  console.log(username)
   let query = {
     tag: username,
     limit: 20
   }
   steem.api.getDiscussionsByFeed(query, (err, result) => {
-    console.log(result)
+    result = result.filter(data => data.parent_permlink === APP_TAG)
     displayContent(result)
   });
 }
+function loadFeaturedTemplate(){
+  let data = `<div class="container"><a href="/review/book1"><div class="review"><div class="review__background clearfix"><img class="review__cover" src="/img/tools.jpeg"><div class="review__content"><h2 class="review__book-title">Tools Of Titans</h2><h2 class="review__book-author">Tim Ferriss</h2><h4 class="review__rating clearfix"><img class="review__star" src="/img/star.png"><img class="review__star" src="/img/star.png"><img class="review__star" src="/img/star.png"><img class="review__star" src="/img/star.png"><img class="review__star" src="/img/star-empty.png"></h4><h3 class="review__quote">“Great for a 5 minute daily read.”</h3><h4 class="review__author">Review By @sambillingham</h4></div></div></div><div class="review"><div class="review__background clearfix"><img class="review__cover" src="/img/obstacle.jpg"><div class="review__content"><h2 class="review__book-title">The Obstacle Is The Way</h2><h2 class="review__book-author">Ryan Holiday</h2><h4 class="review__rating clearfix"><img class="review__star" src="/img/star.png"><img class="review__star" src="/img/star.png"><img class="review__star" src="/img/star.png"><img class="review__star" src="/img/star.png"><img class="review__star" src="/img/star-empty.png"></h4><h3 class="review__quote">“Simple, but not easy practical advice to overcome adversity.”</h3><h4 class="review__author">Review By @sambillingham</h4></div></div></div></a><div class="review"><div class="review__background clearfix"><img class="review__cover" src="/img/million.jpeg"><div class="review__content"><h2 class="review__book-title">A Million Miles In A thousand Years</h2><h2 class="review__book-author">Donald Miller</h2><h4 class="review__rating clearfix"><img class="review__star" src="/img/star.png"><img class="review__star" src="/img/star.png"><img class="review__star" src="/img/star.png"><img class="review__star" src="/img/star.png"><img class="review__star" src="/img/star.png"></h4><h3 class="review__quote">“There is no story without obstacles”</h3><h4 class="review__author">Review By @sambillingham</h4></div></div></div><div class="review"><div class="review__background clearfix"><img class="review__cover" src="/img/rpo.jpg"><div class="review__content"><h2 class="review__book-title">Ready Player One</h2><h2 class="review__book-author">Eernest Cline</h2><h4 class="review__rating clearfix"><img class="review__star" src="/img/star.png"><img class="review__star" src="/img/star.png"><img class="review__star" src="/img/star.png"><img class="review__star" src="/img/star.png"><img class="review__star" src="/img/star.png"></h4><h3 class="review__quote">“Nerd overload in a futuristic VR dystopia, what’s not to like?”</h3><h4 class="review__author">Review By @sambillingham</h4></div></div></div><div class="review"><div class="review__background clearfix"><img class="review__cover" src="/img/sapiens.jpg"><div class="review__content"><h2 class="review__book-title">Sapiens - A Brief History of Humankind</h2><h2 class="review__book-author">Yuval Noah Harari</h2><h4 class="review__rating clearfix"><img class="review__star" src="/img/star.png"><img class="review__star" src="/img/star.png"><img class="review__star" src="/img/star.png"><img class="review__star" src="/img/star.png"><img class="review__star" src="/img/star-empty.png"></h4><h3 class="review__quote">“What they don't teach about humans at school.”</h3><h4 class="review__author">Review By @sambillingham</h4></div></div></div><div class="review"><div class="review__background clearfix"><img class="review__cover" src="/img/bob1.jpg"><div class="review__content"><h2 class="review__book-title">We Are Legion (We Are Bob)</h2><h2 class="review__book-author">Dennis E. Taylor</h2><h4 class="review__rating clearfix"><img class="review__star" src="/img/star.png"><img class="review__star" src="/img/star.png"><img class="review__star" src="/img/star.png"><img class="review__star" src="/img/star.png"><img class="review__star" src="/img/star.png"></h4><h3 class="review__quote">“A new spin on the Sci-fi adventure. I'd take the job.”</h3><h4 class="review__author">Review By @sambillingham</h4></div></div></div><div class="review"><div class="review__background clearfix"><img class="review__cover" src="/img/exp-f.jpg"><div class="review__content"><h2 class="review__book-title">Expeditionary Force</h2><h2 class="review__book-author">Criag Alanson</h2><h4 class="review__rating clearfix"><img class="review__star" src="/img/star.png"><img class="review__star" src="/img/star.png"><img class="review__star" src="/img/star.png"><img class="review__star" src="/img/star.png"><img class="review__star" src="/img/star.png"></h4><h3 class="review__quote">“Cpt. Skippy is hilarious”</h3><h4 class="review__author">Review By @sambillingham</h4></div></div></div><div class="review"><div class="review__background clearfix"><img class="review__cover" src="/img/4hrww.jpg"><div class="review__content"><h2 class="review__book-title">The Four Hour Work Week</h2><h2 class="review__book-author">Tim Ferriss</h2><h4 class="review__rating clearfix"><img class="review__star" src="/img/star.png"><img class="review__star" src="/img/star.png"><img class="review__star" src="/img/star.png"><img class="review__star" src="/img/star.png"><img class="review__star" src="/img/star.png"></h4><h3 class="review__quote">“The kick you need to see a different way through life.”</h3><h4 class="review__author">Review By @sambillingham</h4></div></div></div><div class="review"><div class="review__background clearfix"><img class="review__cover" src="/img/money.jpg"><div class="review__content"><h2 class="review__book-title">The Inertnet Of Money</h2><h2 class="review__book-author">Andreas M. Antonopoulos</h2><h4 class="review__rating clearfix"><img class="review__star" src="/img/star.png"><img class="review__star" src="/img/star.png"><img class="review__star" src="/img/star.png"><img class="review__star" src="/img/star.png"><img class="review__star" src="/img/star.png"></h4><h3 class="review__quote">“Collection of talks but great for anyone wanting to learn about Bitcoin.”</h3><h4 class="review__author">Review By @sambillingham</h4></div></div></div></div>`
+  $('.feed-insert .container').empty()
+  $('.feed-insert .container').append(data)
+
+}
 
 function displayContent(result, initial){
-  if (!initial) result.shift()
-  for (let i = 0; i < result.length ; i++) {
+  if(initial && result.length > 1 || !initial && result.length > 0 ){
+    if (!initial) result.shift()
+    $('.feed-insert .container').empty()
+    for (let i = 0; i < result.length ; i++) {
       let post = result[i];
       allContent.push(post)
 
@@ -83,21 +95,29 @@ function displayContent(result, initial){
       }
 
       let itemTemplate = `
-        <div class="item " data-post-id="${post.id}" data-url="${post.url}" data-permlink="${ post.permlink }">
-          <img class="item__image " src="https://steemitimages.com/520x520/${image}" onerror="">
-          <div class="item__author">
-            <a href="${post.url}"><h2>${post.title}</h2></a>
-            <a href="@${post.author}"><span>@${post.author}</span></a>
-            <form method="post">
-              <input type="hidden" name="postId" value="${post.id}">
-              <input type="hidden" name="author" value="${post.author}">
-              <input type="hidden" name="permlink" value="${post.permlink}">
-              <input type="submit" class="vote" value="Vote">
-            </form>
-          </div>
-        </div>
-        `
-        $('.feed-insert').append(itemTemplate)
+      <a href="/review/book1">
+      <div class="review" data-post-id="${post.id}" data-url="${post.url}" data-permlink="${ post.permlink }">
+      <div class="review__background clearfix">
+      <img class="review__cover" src="https://steemitimages.com/520x520/${image}" onerror="">
+      <div class="review__content">
+      <h2 class="review__book-title">Book Title</h2>
+      <h2 class="review__book-author">Book Author</h2>
+      <h4 class="review__rating clearfix">
+      <img class="review__star" src="/img/star.png">
+      <img class="review__star" src="/img/star.png">
+      <img class="review__star" src="/img/star.png">
+      <img class="review__star" src="/img/star.png">
+      <img class="review__star" src="/img/star-empty.png">
+      </h4>
+      <h3 class="review__quote">“${post.title}”</h3>
+      <h4 class="review__author">Review By @${post.author}</h4></div>
+      </div>
+      </div>`
+      $('.feed-insert .container').append(itemTemplate)
+    }
+  } else {
+    $('.feed-insert .container').empty()
+    $('.feed-insert .container').append('<p>No Reviews in your personal feed to display 🙁</p>')
   }
 }
 
@@ -324,14 +344,29 @@ getAccountInfo = (username) => {
 
 // ----------------------------------------------------
 
-if ($('main').hasClass('feed') ) {
-    let feedType = $('main.feed').data('feed-type')
+if ($('main').hasClass('gallery__wrapper') ) {
 
-    if(feedType === 'trending'){
-      getTrending({'limit': 20 })
-    } else {
-      getLatest({'limit': 20 })
-    }
+    // UI ACTIONS
+    $('.sidebar__list-item').on('click', (e)=> {
+      $('.sidebar__list-item').removeClass('is-active')
+      $(e.currentTarget).addClass('is-active')
+      let filter = $(e.currentTarget).data('filter')
+
+      if(filter === 'trending'){
+        getTrending({ 'tag': APP_TAG, 'limit': 20 })
+      } else if(filter === 'feed'){
+        getUserFeed(USERNAME)
+      } else if(filter === 'latest'){
+        getLatest({'tag': APP_TAG, 'limit': 20 })
+      } else {
+        //display Featured
+        // getLatest({'tag': APP_TAG, 'limit': 20 })
+        loadFeaturedTemplate()
+      }
+    })
+
+
+
 }
 
 if ($('main').hasClass('single')) {

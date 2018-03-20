@@ -67,9 +67,11 @@ header {
   top: 5px;
   left: 6px;
 }
-.sidebar__list-item.is-active {
+.sidebar__list-item.is-active,
+.sidebar__list-item:hover {
   background-color: #e7e7e7;
   border-radius: 4px;
+  cursor: pointer;
 }
 
 .gallery {
@@ -90,8 +92,11 @@ header {
   cursor: pointer;
   transition: all 300ms ;
   border: solid 2px transparent;
+  color: #212529;
 }
+.review a {
 
+}
 .review:hover {
   border-radius: 7px;
   background-color: #fafafa;

@@ -2,28 +2,23 @@ extends layout
 
 block content
 
-  header
-    img.logo(src="/img/logo.svg")
-
-    .meta.clearfix
-      p @sambillingham
-      img.profile(src="/img/sam.jpg")
+  include partials/nav
 
   main.gallery__wrapper.clearfix
     aside.sidebar
       h2.sidebar__subtitle Discover
 
       ul.sidebar__list
-        li.sidebar__list-item
+        li.sidebar__list-item(data-filter="latest")
           img(src="/img/latest-icon.png")
           span Latest
-        li.sidebar__list-item.is-active
+        li.sidebar__list-item.is-active(data-filter="featured")
           img(src="/img/featured-icon.png")
           span Featured
-        li.sidebar__list-item
+        li.sidebar__list-item(data-filter="trending")
           img(src="/img/trending-icon.png")
           span Trending
-        li.sidebar__list-item
+        li.sidebar__list-item(data-filter="feed")
           img(src="/img/feed-icon.png")
           span Feed
 
