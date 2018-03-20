@@ -1,6 +1,8 @@
 # Good Book.reviews
 ![GBR](https://user-images.githubusercontent.com/34964560/37649910-4988b622-2c2b-11e8-81ff-bfecbb215984.png)
 
+The aim of this project is to create a book review platform that is powered by steem encourageing people to write in-depth value reviews. Steemit & Busy are both general purpose blogging platforms, that means they are able to accommodate many types of content but specialise for none. I believe creating a specialised platform for books onto of STEEM can foster a new community and bring value to the Blockchain as a whole.
+
 ## What does it include
 - Express server with routing
 - Authentication with Steemconnect
