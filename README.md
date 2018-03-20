@@ -1,16 +1,16 @@
-# boilerplate
-This project is a boilerplate for rapid development ontop of the steem network.
+# Good Book.reviews
+![GBR](https://user-images.githubusercontent.com/34964560/37649910-4988b622-2c2b-11e8-81ff-bfecbb215984.png)
+
+The aim of this project is to create a book review platform that is powered by steem encourageing people to write in-depth value reviews. Steemit & Busy are both general purpose blogging platforms, that means they are able to accommodate many types of content but specialise for none. I believe creating a specialised platform for books onto of STEEM can foster a new community and bring value to the Blockchain as a whole.
 
 ## What does it include
-This boilerplate includes.
-- Authenticate with SteemConnect/Logout
-- Trending + latest post feeds
-- Logged In user profile + 'my blog' feed
-- @username page with profile info + blog feed
-- Create Top Level Post
-- Upvote Top Level Post from feed
-- Single Page for posts + comments thread
-- Upvote + comment on single page
+- Express server with routing
+- Authentication with Steemconnect
+- Gallery View Template + Sidebar (Latest/Trending/Featured/User Feed)
+- Data From Blockchain (Latest/Trending/User Feed) Can specify global tag, mvp uses 'book-review' but will use any tag for testing
+-Featured - Currently uses Mock example (until Beta is setup allowing posts to be 'featured')
+- Single View Template
+- Create Post - Post to blockchain with custom metadata for Book/Author/Rating values
 
 ## setup & install
 - install node.js & NPM - [https://nodejs.org/en/](https://nodejs.org/en/)
@@ -22,8 +22,3 @@ This boilerplate includes.
 - npm start // run the project on default port 3000
 - navigate to localhost:3000 in your browser
 - click on the blue 'login with steemconnect to authenticate your app'
-
-![LOGIN](https://i.imgsafe.org/66/6654933f96.png)
-![USER PROFILE](https://i.imgsafe.org/66/6654936f6a.png)
-![FEED](https://i.imgsafe.org/66/665480732c.png)
-![CREATE POST](https://i.imgsafe.org/66/66547d678e.png)

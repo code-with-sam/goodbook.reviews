@@ -1,3 +1,183 @@
 extends layout
 
 block content
+
+  include partials/nav
+
+  main.gallery__wrapper.clearfix
+    aside.sidebar
+      h2.sidebar__subtitle Discover
+
+      ul.sidebar__list
+        li.sidebar__list-item(data-filter="latest")
+          img(src="/img/latest-icon.png")
+          span Latest
+        li.sidebar__list-item.is-active(data-filter="featured")
+          img(src="/img/featured-icon.png")
+          span Featured
+        li.sidebar__list-item(data-filter="trending")
+          img(src="/img/trending-icon.png")
+          span Trending
+        li.sidebar__list-item(data-filter="feed")
+          img(src="/img/feed-icon.png")
+          span Feed
+
+      hr.sidebar__divider
+
+      h2.sidebar__subtitle Genres
+      ul.sidebar__list
+        li.sidebar__list-item
+          img(src="/img/genre-fantasy-icon.png")
+          span Fantasy
+        li.sidebar__list-item
+          img(src="/img/genre-thriller-icon.png")
+          span Thriller
+        li.sidebar__list-item
+          img(src="/img/genre-science-fiction-icon.png")
+          span Science Fiction
+        li.sidebar__list-item
+          img(src="/img/genre-mystery-icon.png")
+          span Mystery
+        li.sidebar__list-item
+          img(src="/img/genre-sports-icon.png")
+          span Sports
+        li.sidebar__list-item
+          img(src="/img/genre-history-icon.png")
+          span Classics
+        li.sidebar__list-item
+          img(src="/img/genre-business-icon.png")
+          span Business
+
+
+    section.gallery.clearfix
+      .container
+        //- h2.gallery__title Featured
+        //- h4 [Global]-[Personal]
+      .container
+        .review
+          .review__background.clearfix
+            img(src="/img/tools.jpeg").review__cover
+            .review__content
+              h2.review__book-title Tools Of Titans
+              h2.review__book-author Tim Ferriss
+              h4.review__rating.clearfix
+                img(src="/img/star.png").review__star
+                img(src="/img/star.png").review__star
+                img(src="/img/star.png").review__star
+                img(src="/img/star.png").review__star
+                img(src="/img/star-empty.png").review__star
+              h3.review__quote “Great for a 5 minute daily read.”
+              h4.review__author Review By @sambillingham
+        .review
+         .review__background.clearfix
+           img(src="/img/obstacle.jpg").review__cover
+           .review__content
+             h2.review__book-title The Obstacle Is The Way
+             h2.review__book-author Ryan Holiday
+             h4.review__rating.clearfix
+               img(src="/img/star.png").review__star
+               img(src="/img/star.png").review__star
+               img(src="/img/star.png").review__star
+               img(src="/img/star.png").review__star
+               img(src="/img/star-empty.png").review__star
+             h3.review__quote “Simple, but not easy practical advice to overcome adversity.”
+             h4.review__author Review By @sambillingham
+        .review
+         .review__background.clearfix
+           img(src="/img/million.jpeg").review__cover
+           .review__content
+             h2.review__book-title A Million Miles In A thousand Years
+             h2.review__book-author Donald Miller
+             h4.review__rating.clearfix
+               img(src="/img/star.png").review__star
+               img(src="/img/star.png").review__star
+               img(src="/img/star.png").review__star
+               img(src="/img/star.png").review__star
+               img(src="/img/star.png").review__star
+             h3.review__quote “There is no story without obstacles”
+             h4.review__author Review By @sambillingham
+
+        .review
+          .review__background.clearfix
+            img(src="/img/rpo.jpg").review__cover
+            .review__content
+              h2.review__book-title Ready Player One
+              h2.review__book-author Eernest Cline
+              h4.review__rating.clearfix
+                img(src="/img/star.png").review__star
+                img(src="/img/star.png").review__star
+                img(src="/img/star.png").review__star
+                img(src="/img/star.png").review__star
+                img(src="/img/star.png").review__star
+              h3.review__quote “Nerd overload in a futuristic VR dystopia, what’s not to like?”
+              h4.review__author Review By @sambillingham
+        .review
+         .review__background.clearfix
+           img(src="/img/sapiens.jpg").review__cover
+           .review__content
+             h2.review__book-title Sapiens - A Brief History of Humankind
+             h2.review__book-author Yuval Noah Harari
+             h4.review__rating.clearfix
+               img(src="/img/star.png").review__star
+               img(src="/img/star.png").review__star
+               img(src="/img/star.png").review__star
+               img(src="/img/star.png").review__star
+               img(src="/img/star-empty.png").review__star
+             h3.review__quote “What they don't teach about humans at school.”
+             h4.review__author Review By @sambillingham
+        .review
+         .review__background.clearfix
+           img(src="/img/bob1.jpg").review__cover
+           .review__content
+             h2.review__book-title We Are Legion (We Are Bob)
+             h2.review__book-author Dennis E. Taylor
+             h4.review__rating.clearfix
+               img(src="/img/star.png").review__star
+               img(src="/img/star.png").review__star
+               img(src="/img/star.png").review__star
+               img(src="/img/star.png").review__star
+               img(src="/img/star.png").review__star
+             h3.review__quote “A new spin on the Sci-fi adventure. I'd take the job.”
+             h4.review__author Review By @sambillingham
+        .review
+          .review__background.clearfix
+            img(src="/img/exp-f.jpg").review__cover
+            .review__content
+              h2.review__book-title Expeditionary Force
+              h2.review__book-author Criag Alanson
+              h4.review__rating.clearfix
+                img(src="/img/star.png").review__star
+                img(src="/img/star.png").review__star
+                img(src="/img/star.png").review__star
+                img(src="/img/star.png").review__star
+                img(src="/img/star.png").review__star
+              h3.review__quote “Cpt. Skippy is hilarious”
+              h4.review__author Review By @sambillingham
+        .review
+         .review__background.clearfix
+           img(src="/img/4hrww.jpg").review__cover
+           .review__content
+             h2.review__book-title The Four Hour Work Week
+             h2.review__book-author Tim Ferriss
+             h4.review__rating.clearfix
+               img(src="/img/star.png").review__star
+               img(src="/img/star.png").review__star
+               img(src="/img/star.png").review__star
+               img(src="/img/star.png").review__star
+               img(src="/img/star.png").review__star
+             h3.review__quote “The kick you need to see a different way through life.”
+             h4.review__author Review By @sambillingham
+        .review
+         .review__background.clearfix
+           img(src="/img/money.jpg").review__cover
+           .review__content
+             h2.review__book-title The Inertnet Of Money
+             h2.review__book-author Andreas M. Antonopoulos
+             h4.review__rating.clearfix
+               img(src="/img/star.png").review__star
+               img(src="/img/star.png").review__star
+               img(src="/img/star.png").review__star
+               img(src="/img/star.png").review__star
+               img(src="/img/star.png").review__star
+             h3.review__quote “Collection of talks but great for anyone wanting to learn about Bitcoin.”
+             h4.review__author Review By @sambillingham
