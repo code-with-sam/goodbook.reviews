@@ -14,21 +14,24 @@ router.post('/create-post', util.isAuthenticated, (req, res) => {
     let author = req.session.steemconnect.name
     let permlink = util.urlString()
     var tags = req.body.tags.split(',').map(item => item.trim());
-    let primaryTag = 'goodbook-reviews'
-    let otherTags = tags.slice(1)
+    let primaryTag = 'goodbook-test'
+    let otherTags = tags
     let title = req.body.title
     let body = req.body.post
     let customData = {
+      tags: otherTags,
       book: req.body.book,
       author: req.body.author,
+      rating: req.body.rating,
       app: 'goodbook.reviews.app/v0.1.0'
     }
 
     steem.comment('', primaryTag, author, permlink, title, body, customData, (err, steemResponse) => {
         if (err) {
+          console.log(err)
           res.render('post', {
             name: req.session.steemconnect.name,
-            msg: 'Error'
+            msg: `Error - ${err}`
           })
         } else {
           res.render('post', {

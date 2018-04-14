@@ -93,22 +93,17 @@ function displayContent(result, initial){
       } else {
         image = JSON.parse(post.json_metadata).image[0]
       }
+      let json = getBookJson(post.json_metadata)
 
       let itemTemplate = `
       <a href="/review/${post.parent_permlink}/${post.author}/${post.permlink}">
       <div class="review" data-post-id="${post.id}" data-url="${post.url}" data-permlink="${ post.permlink }">
       <div class="review__background clearfix">
-      <img class="review__cover" src="https://steemitimages.com/520x520/${image}" onerror="">
+      <img class="review__cover" src="https://steemitimages.com/520x520/${image}" onerror="this.src='http://placehold.it/200x200'">
       <div class="review__content">
-      <h2 class="review__book-title">Book Title</h2>
-      <h2 class="review__book-author">Book Author</h2>
-      <h4 class="review__rating clearfix">
-      <img class="review__star" src="/img/star.png">
-      <img class="review__star" src="/img/star.png">
-      <img class="review__star" src="/img/star.png">
-      <img class="review__star" src="/img/star.png">
-      <img class="review__star" src="/img/star-empty.png">
-      </h4>
+      <h2 class="review__book-title">${json.bookTitle}</h2>
+      <h2 class="review__book-author">${json.bookAuthor}</h2>
+      <h4 class="review__rating clearfix">${json.ratingHTML}</h4>
       <h3 class="review__quote">“${post.title}”</h3>
       <h4 class="review__author">Review By @${post.author}</h4></div>
       </div>
@@ -207,27 +202,20 @@ function generateProfileImage(author){
 
 function appendSinglePost(post, users){
   let author = users[post.author]
-  console.log(author)
   let html = converter.makeHtml(post.body)
   let featureImageUrl = getFeatureImage(post)
   let profileImage = generateProfileImage(author)
   let AuthorReputation = steem.formatter.reputation(author.reputation)
   let postTime = moment(post.created).fromNow();
-
+  let json = getBookJson(post.json)
   // let tags = JSON.parse(post.json).tags.reduce( (all,tag) => all + `<span>${tag}</span>`, '')
   html = html.replace(/img/, 'img class="review__content--first-image"');
   let aside = `
     <div class="single__book-meta">
       <img src="${featureImageUrl}" class="single__book-cover">
-      <div class="single__book-rating stars clearfix">
-        <img src="/img/star.png" class="review__star">
-        <img src="/img/star.png" class="review__star">
-        <img src="/img/star.png" clas s="review__star">
-        <img src="/img/star.png" class="review__star">
-        <img src="/img/star-empty.png" class="review__star">
-      </div>
-      <h2 class="review__book-title">Book Title</h2>
-      <h2 class="review__book-author">Book Author</h2>
+      <div class="single__book-rating stars clearfix">${json.ratingHTML}</div>
+      <h2 class="review__book-title">${json.bookTitle}</h2>
+      <h2 class="review__book-author">${json.bookAuthor}</h2>
     </div>
   `
 
@@ -323,6 +311,24 @@ getFeatureImage = (post) => {
       return image
     }
 
+getBookJson = (post_metadata) => {
+  let json = {};
+  try {
+    json = JSON.parse(post_metadata)
+  } catch(err){console.log(err)}
+
+  let bookTitle = json.book || ''
+  let bookAuthor = json.author || ''
+  let rating = json.rating || ''
+  let ratingHTML = '<img src="/img/star.png" class="review__star">'.repeat(rating) + '<img src="/img/star-empty.png" class="review__star">'.repeat(5-rating)
+
+  return {
+      bookTitle,
+      bookAuthor,
+      rating,
+      ratingHTML
+  }
+}
 getAccountInfo = (username) => {
 
     let totalVestingShares, totalVestingFundSteem;
@@ -473,8 +479,4 @@ $('main').on('click', '.send-comment', (e) => {
           console.log(response)
           $(`<p>${response.msg}</p>`).insertAfter($comment)
       })
-})
-
-window.addEventListener('load', function(){
-    Grade(document.querySelectorAll('.gradient-wrap'))
 })
