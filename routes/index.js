@@ -29,10 +29,15 @@ router.get('/@:username?', (req, res, next) => {
       });
 });
 
-router.get('/review/:slug', (req, res) => {
+router.get('/review/:category/:username/:slug', (req, res) => {
       let slug = req.params.slug
+      let category = req.params.category
+      let username = req.params.username
+      
       res.render('single', {
-        slug: slug
+        permlink: slug,
+        category: category,
+        username: username
       });
 });
 

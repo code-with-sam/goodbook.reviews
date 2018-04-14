@@ -387,3 +387,9 @@ button, input[type="submit"] {
  .pullquote:after{
    content: "”"
  }
+
+
+
+ .review__content--first-image {
+   display: none;
+ }

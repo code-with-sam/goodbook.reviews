@@ -95,7 +95,7 @@ function displayContent(result, initial){
       }
 
       let itemTemplate = `
-      <a href="/review/book1">
+      <a href="/review/${post.parent_permlink}/${post.author}/${post.permlink}">
       <div class="review" data-post-id="${post.id}" data-url="${post.url}" data-permlink="${ post.permlink }">
       <div class="review__background clearfix">
       <img class="review__cover" src="https://steemitimages.com/520x520/${image}" onerror="">
@@ -159,7 +159,8 @@ function getPostAndComments(url) {
         created: result.content[post].created,
         votes: result.content[post].net_votes,
         voters: result.content[post].active_votes.map(vote => vote.voter),
-        value: Math.round( parseFloat(result.content[post].pending_payout_value.substring(0,5)) * 100) / 100
+        value: Math.round( parseFloat(result.content[post].pending_payout_value.substring(0,5)) * 100) / 100,
+        commentCount: result.content[post].children
       })
     }
 
@@ -208,14 +209,42 @@ function appendSinglePost(post, users){
   let author = users[post.author]
   console.log(author)
   let html = converter.makeHtml(post.body)
+  let featureImageUrl = getFeatureImage(post)
   let profileImage = generateProfileImage(author)
+  let AuthorReputation = steem.formatter.reputation(author.reputation)
+  let postTime = moment(post.created).fromNow();
 
-  let tags = JSON.parse(post.json).tags.reduce( (all,tag) => all + `<span>${tag}</span>`, '')
+  // let tags = JSON.parse(post.json).tags.reduce( (all,tag) => all + `<span>${tag}</span>`, '')
+  html = html.replace(/img/, 'img class="review__content--first-image"');
+  let aside = `
+    <div class="single__book-meta">
+      <img src="${featureImageUrl}" class="single__book-cover">
+      <div class="single__book-rating stars clearfix">
+        <img src="/img/star.png" class="review__star">
+        <img src="/img/star.png" class="review__star">
+        <img src="/img/star.png" clas s="review__star">
+        <img src="/img/star.png" class="review__star">
+        <img src="/img/star-empty.png" class="review__star">
+      </div>
+      <h2 class="review__book-title">Book Title</h2>
+      <h2 class="review__book-author">Book Author</h2>
+    </div>
+  `
+
   let header = `
-    <img src="${profileImage}" class="author-img" width="35" height="35" src="">
-    <span class="overlay__author-username">@${post.author}</span>
-    <div class="tags">${tags}</div>
+    <div class="single__meta-container clearfix">
+      <img src="${profileImage}" class="single__profile-image" width="35" height="35" src="">
+      <div class="single__meta">
+        <h3 class="single__meta-author title is-2">@${post.author} <span class="single__reputation">${AuthorReputation}</span></h3>
+        <p class="single__datetime">${postTime} in ${post.parent_permlink}</p>
+      </div>
+      <div class="single__post-values">
+        <span>${post.commentCount}<img src="/img/comment-icon.png"></span>
+        <span>${post.votes}<img src="/img/zap-icon.png"></span>
+      </div>
+    </div>
     <h2 class="title">${post.title}</h2>
+    <hr>
   `
   let voteButton = `
   <form method="post">
@@ -230,7 +259,8 @@ function appendSinglePost(post, users){
     <span class="send-comment" data-parent="${post.author}" data-parent-permlink="${post.permlink}" data-parent-title="${post.title}">Post Comment</span>
   </div>
   `
-  $('main').append(header + html + voteButton + commentBox)
+  $('.single__aside').append(aside)
+  $('.single__content').append(header + html + voteButton + commentBox)
 }
 
 function appendComments(posts){
@@ -281,6 +311,16 @@ createCommentTemplate = (post) => {
         </div>
       </div>`
       return template;
+    }
+
+getFeatureImage = (post) => {
+      console.log(post)
+      if( typeof JSON.parse(post.json).image === 'undefined' ){
+        image = genImageInHTML(post.body)
+      } else {
+        image = JSON.parse(post.json).image[0]
+      }
+      return image
     }
 
 getAccountInfo = (username) => {
