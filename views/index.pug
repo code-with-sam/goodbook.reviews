@@ -5,50 +5,8 @@ block content
   include partials/nav
 
   main.gallery__wrapper.clearfix
-    aside.sidebar
-      h2.sidebar__subtitle Discover
-
-      ul.sidebar__list
-        li.sidebar__list-item(data-filter="latest")
-          img(src="/img/latest-icon.png")
-          span Latest
-        li.sidebar__list-item.is-active(data-filter="featured")
-          img(src="/img/featured-icon.png")
-          span Featured
-        li.sidebar__list-item(data-filter="trending")
-          img(src="/img/trending-icon.png")
-          span Trending
-        li.sidebar__list-item(data-filter="feed")
-          img(src="/img/feed-icon.png")
-          span Feed
-
-      hr.sidebar__divider
-
-      h2.sidebar__subtitle Genres
-      ul.sidebar__list
-        li.sidebar__list-item
-          img(src="/img/genre-fantasy-icon.png")
-          span Fantasy
-        li.sidebar__list-item
-          img(src="/img/genre-thriller-icon.png")
-          span Thriller
-        li.sidebar__list-item
-          img(src="/img/genre-science-fiction-icon.png")
-          span Science Fiction
-        li.sidebar__list-item
-          img(src="/img/genre-mystery-icon.png")
-          span Mystery
-        li.sidebar__list-item
-          img(src="/img/genre-sports-icon.png")
-          span Sports
-        li.sidebar__list-item
-          img(src="/img/genre-history-icon.png")
-          span Classics
-        li.sidebar__list-item
-          img(src="/img/genre-business-icon.png")
-          span Business
-
-
+    include partials/sidebar
+    
     section.gallery.clearfix.feed-insert
       .container
         a(href="/review/book1")

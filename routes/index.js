@@ -41,16 +41,25 @@ router.get('/review/:category/:username/:slug', (req, res) => {
       });
 });
 
+router.get('/@:username', (req, res, next) => {
+    let username = req.params.username
+    res.render('profile', {
+      name: username,
+      feed: 'trending'
+    });
+});
 
-// router.get('/:category/@:username/:permlink', (req, res, next) => {
-//       let category = req.params.category
-//       let username = req.params.username
-//       let permlink = req.params.permlink
-//       res.render('single', {
-//         category: category,
-//         username: username,
-//         permlink: permlink
-//       });
-// });
+router.get('/review/:category/:username/:slug', (req, res) => {
+    let slug = req.params.slug
+    let category = req.params.category
+    let username = req.params.username
+
+    res.render('single', {
+      permlink: slug,
+      category: category,
+      username: username
+    });
+});
+
 
 module.exports = router;

@@ -426,7 +426,7 @@ if ($('main').hasClass('dashboard')) {
 }
 
 if ($('main').hasClass('profile') ) {
-  let username = $('.profile').data('username')
+  let username = $('main').data('username')
   getAccountInfo(username).then(data => {
     let template =
     `<section class="profile">

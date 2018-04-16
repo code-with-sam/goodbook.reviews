@@ -36,8 +36,9 @@ app.use(expressSanitized.middleware());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(util.setUser);
+
 app.use('/', index);
-app.use('/dashboard', user);
 app.use('/auth', auth);
 app.use('/logout', auth);
 app.use('/feed', feed);
