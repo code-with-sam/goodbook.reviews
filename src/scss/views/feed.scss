@@ -1,14 +1,12 @@
 .gallery__wrapper {
   background-color: #f6f6f7;
   min-height: 100vh;
+  @include clearfix;
 }
 .gallery {
   float: left;
   width: 80%;
-}
-
-.gallery__title {
-  margin: 0 0 20px 20px ;
+  @include clearfix;
 }
 
 .review {
@@ -30,6 +28,7 @@
 
 .review__background {
   padding: 20px 6px 20px 20px;
+  @include clearfix;
 }
 
 .review__cover {
@@ -68,6 +67,7 @@
 }
 .review__rating {
   font-size: 0.7rem;
+  @include clearfix;
 }
 .review__star {
   float: left;

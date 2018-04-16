@@ -3,7 +3,11 @@
   border-top: solid 2px #e1e1e1;
 }
 
-input, label, textarea, button, select {
+input,
+label,
+textarea,
+button,
+select {
   margin: 10px 0 5px;
   width: 100%;
   border-radius: 3px;
@@ -11,7 +15,8 @@ input, label, textarea, button, select {
   font-family: 'Lato', sans-serif;
 }
 
-input, textarea {
+input,
+textarea {
   border: solid 1px #7b7b7b;
 }
 
@@ -23,6 +28,7 @@ textarea {
   min-height: 200px;
 }
 
-button, input[type="submit"] {
+button,
+input[type="submit"] {
   cursor: pointer;
 }

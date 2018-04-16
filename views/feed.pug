@@ -3,14 +3,8 @@ extends layout
 block content
   include partials/nav
 
-  main.gallery__wrapper.clearfix.feed(data-feed-type=`${feed}`)
+  main.gallery__wrapper.feed(data-feed-type=`${feed}`)
     include partials/sidebar
 
-    section.gallery.clearfix.feed-insert
+    section.gallery.feed-insert
       .container
-
-  //- main.feed(data-feed-type=`${feed}`)
-  //-   .container
-  //-     .row.feed-insert
-  //-
-  //- script(src='/js/showdown.min.js')

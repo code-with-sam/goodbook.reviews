@@ -9,13 +9,18 @@ main, aside {
   margin: 0 auto;
 }
 
-
 h1,h2,h3,h4,h5 {
   font-weight: 700;
   font-family: 'Lato', sans-serif;
   line-height: 1.25;
 }
 
+img {
+  max-width: 100%;
+}
+.container {
+  @include clearfix;
+}
 .button {
   font-family: 'Lato', sans-serif;
   font-weight: 700;

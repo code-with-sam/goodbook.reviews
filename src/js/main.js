@@ -113,12 +113,12 @@ function displayContent(result, initial){
       let itemTemplate = `
       <a href="/review/${post.parent_permlink}/${post.author}/${post.permlink}">
       <div class="review" data-post-id="${post.id}" data-url="${post.url}" data-permlink="${ post.permlink }">
-      <div class="review__background clearfix">
+      <div class="review__background">
       <img class="review__cover" src="https://steemitimages.com/520x520/${image}" onerror="this.src='http://placehold.it/200x200'">
       <div class="review__content">
       <h2 class="review__book-title">${json.bookTitle}</h2>
       <h2 class="review__book-author">${json.bookAuthor}</h2>
-      <h4 class="review__rating clearfix">${json.ratingHTML}</h4>
+      <h4 class="review__rating">${json.ratingHTML}</h4>
       <h3 class="review__quote">“${post.title}”</h3>
       <h4 class="review__author">Review By @${post.author}</h4></div>
       </div>
