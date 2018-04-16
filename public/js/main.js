@@ -2,7 +2,8 @@ let allUsers = []
 let allContent = []
 let converter = new showdown.Converter({ tables: true })
 const APP_TAG = 'book-review' //goodbook-review
-const USERNAME = 'sambillingham' // get from template
+// const APP_TAG = 'goodbook-test' //goodbook-review
+// const USERNAME = 'sambillingham' // get from template
 
 function getTrending(query, initial){
   steem.api.getDiscussionsByTrending(query, (err, result) => {
@@ -391,29 +392,24 @@ getAccountInfo = (username) => {
 // ----------------------------------------------------
 
 if ($('main').hasClass('gallery__wrapper') ) {
+  let filter = $('main').data('feed-type')
 
-    // UI ACTIONS
-    $('.sidebar__list-item').on('click', (e)=> {
-      $('.sidebar__list-item').removeClass('is-active')
-      $(e.currentTarget).addClass('is-active')
-      let filter = $(e.currentTarget).data('filter')
-
-      if(filter === 'trending'){
-        getTrending({ 'tag': APP_TAG, 'limit': 20 })
-      } else if(filter === 'feed'){
-        getUserFeed(USERNAME)
-      } else if(filter === 'latest'){
-        getLatest({'tag': APP_TAG, 'limit': 20 })
-      } else {
-        //display Featured
-        // getLatest({'tag': APP_TAG, 'limit': 20 })
-        loadFeaturedTemplate()
-      }
-    })
-
+  if(filter === 'trending'){
+    getTrending({ 'tag': APP_TAG, 'limit': 20 }, true)
+  } else if(filter === 'feed'){
+    let username = $('main').data('username')
+    getUserFeed(username)
+  } else if(filter === 'latest'){
+    getLatest({'tag': APP_TAG, 'limit': 20 }, true)
+  } else {
+    //display Featured
+    // getLatest({'tag': APP_TAG, 'limit': 20 })
+    loadFeaturedTemplate()
+  }
 
 
 }
+
 
 if ($('main').hasClass('single')) {
   let data = $('main').data()
