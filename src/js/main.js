@@ -1,12 +1,25 @@
+// style imports via parcel
+import 'bootstrap/dist/css/bootstrap.css';
+import "../scss/style.scss"
+
+// dependencies
+import showdown from 'showdown'
+import moment from 'moment'
+import $ from 'jquery'
+import steem from 'steem'
+
+//modules
+
 let allUsers = []
 let allContent = []
 let converter = new showdown.Converter({ tables: true })
 const APP_TAG = 'book-review' //goodbook-review
 // const APP_TAG = 'goodbook-test' //goodbook-review
-// const USERNAME = 'sambillingham' // get from template
 
 function getTrending(query, initial){
   steem.api.getDiscussionsByTrending(query, (err, result) => {
+    console.log(result)
+
     if (err === null) {
       displayContent(result,initial)
       console.log(result)
@@ -20,8 +33,8 @@ function getTrending(query, initial){
 function getLatest(query, initial){
 
   steem.api.getDiscussionsByCreated(query, (err, result) => {
+    console.log(err, result)
     if (err === null) {
-      console.log(result)
       displayContent(result, initial)
       getaccounts(result.map(post => post.author))
     } else {
@@ -79,6 +92,7 @@ function displayContent(result, initial){
     $('.feed-insert .container').empty()
     for (let i = 0; i < result.length ; i++) {
       let post = result[i];
+      let image;
       allContent.push(post)
 
       var urlRegex = /(https?:\/\/[^\s]+)/g;
@@ -136,9 +150,10 @@ function genImageInHTML(markdown){
 
 function getPostAndComments(url) {
   steem.api.getState(url, (err, result) => {
+    console.log(result)
     let users = result.accounts;
     let resultsArray = [];
-    for ( post in result.content ){
+    for (let post in result.content ){
 
       var html = result.content[post].body
 
@@ -209,7 +224,8 @@ function appendSinglePost(post, users){
   let AuthorReputation = steem.formatter.reputation(author.reputation)
   let postTime = moment(post.created).fromNow();
   let json = getBookJson(post.json)
-  // let tags = JSON.parse(post.json).tags.reduce( (all,tag) => all + `<span>${tag}</span>`, '')
+  // let tags = JSON.parse(post.json).tags.reduce( (all,tag) => all + `<span>${tag}</span>`, '') // will be generes
+
   html = html.replace(/img/, 'img class="review__content--first-image"');
   let aside = `
     <div class="single__book-meta">
@@ -252,8 +268,8 @@ function appendSinglePost(post, users){
   $('.single__content').append(header + html + voteButton + commentBox)
 }
 
-function appendComments(posts){
-  $('main').append('<div class="comments"></div>')
+function appendComments(posts) {
+  $('.single__content').append('<div class="comments"></div>')
 
     posts.forEach( (postsAtDepth, i, arr) => {
       postsAtDepth.forEach( (post, i, arr) => {
@@ -269,7 +285,7 @@ function appendComments(posts){
 }
 
 
-createCommentTemplate = (post) => {
+function createCommentTemplate(post) {
       var permlink = post.parent_permlink
       var html = converter.makeHtml(post.body)
       var voteMessage = (post.votes > 1 || post.votes == 0 )? 'votes' : 'vote'
@@ -302,7 +318,8 @@ createCommentTemplate = (post) => {
       return template;
     }
 
-getFeatureImage = (post) => {
+function getFeatureImage(post) {
+  let image;
       console.log(post)
       if( typeof JSON.parse(post.json).image === 'undefined' ){
         image = genImageInHTML(post.body)
@@ -312,7 +329,7 @@ getFeatureImage = (post) => {
       return image
     }
 
-getBookJson = (post_metadata) => {
+function getBookJson(post_metadata) {
   let json = {};
   try {
     json = JSON.parse(post_metadata)
@@ -330,7 +347,7 @@ getBookJson = (post_metadata) => {
       ratingHTML
   }
 }
-getAccountInfo = (username) => {
+function getAccountInfo(username) {
 
     let totalVestingShares, totalVestingFundSteem;
     let userInfo;

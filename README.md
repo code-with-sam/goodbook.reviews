@@ -23,6 +23,8 @@ The aim of this project is to create a book review platform that is powered by s
 - navigate to localhost:3000 in your browser
 - click on the blue 'login with steemconnect to authenticate your app'
 
-## Compile Sass to css
+## Compile SCSS & js via parcel
+```npm install -g parcel-bundler```
 
-```npm run dev``` - to start sass compilations
+```npm run dev``` - to watch for changes in src/ folder
+```npm run build``` - builds for prod

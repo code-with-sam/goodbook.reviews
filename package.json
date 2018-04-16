@@ -4,29 +4,25 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "build-task:scss-compile": "node-sass-chokidar --source-map true src/scss/ -o public/css",
-    "build-task:autoprefixer": "postcss public/css/*.css --use autoprefixer -d public/css",
-    "sass:build": "npm-run-all -p build-task:*",
-    "sass:watch": "chokidar 'src/scss/**/*.scss' -c 'npm run sass:build'",
-    "dev": "npm-run-all -p sass:*"
+    "dev": "parcel watch src/js/main.js",
+    "build": "parcel build src/js/main.js"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
+    "bootstrap": "^4.1.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.15.5",
     "express-sanitize-escape": "^1.1.0",
     "express-session": "^1.15.6",
+    "jquery": "^3.3.1",
+    "moment": "^2.22.1",
     "morgan": "~1.9.0",
-    "node-sass-chokidar": "^1.2.2",
+    "node-sass": "^4.8.3",
     "pug": "2.0.0-beta11",
     "sc2-sdk": "^1.0.2",
-    "serve-favicon": "~2.4.5"
-  },
-  "devDependencies": {
-    "autoprefixer": "^8.2.0",
-    "chokidar-cli": "^1.2.0",
-    "npm-run-all": "^4.1.2",
-    "postcss-cli": "^5.0.0"
+    "serve-favicon": "~2.4.5",
+    "showdown": "^1.8.6",
+    "steem": "^0.7.1"
   }
 }
