@@ -7,6 +7,8 @@ let bodyParser = require('body-parser');
 let session = require('express-session');
 let expressSanitized = require('express-sanitize-escape');
 
+let util = require('./modules/util');
+
 let index = require('./routes/index');
 let user = require('./routes/user');
 let auth = require('./routes/auth');

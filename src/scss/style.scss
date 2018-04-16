@@ -1,43 +1,23 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:400,700|Source+Serif+Pro');
 
 body {
-  background: red;
   font-family: 'Source Serif Pro', serif;
   font-weight: 200;
   line-height: 1.5;
+  background-color: #f6f6f7;
 }
 
 h1,h2,h3,h4,h5 {
   font-weight: 700;
   font-family: 'Lato', sans-serif;
-      line-height: 1.25;
+  line-height: 1.25;
 }
-header {
-  padding: 6px 0;
-}
+
+@import "partials/nav";
+
 .button {
-  background: #cacaca;
-  color: #515151;
-  padding: 6px 12px;
-  border-radius: 4px;
   font-family: 'Lato', sans-serif;
   font-weight: 700;
-}
-.logo {
-  width: 130px;
-  margin-left: 20px;
-}
-.meta {
-  float: right;
-  padding: 6px 15px;;
-}
-.meta p {
-  float: left;
-  padding: 3px 10px;
-  font-size: 0.8rem;
-  color: #575757;
-}
-.post-review {
   float: right;
   padding: 4px 16px;
   border: solid 1px #d7d7d7;
@@ -45,23 +25,17 @@ header {
   color: #5d5d5d;
   border-radius: 4px;
 }
-.profile {
-  float: left;
-  width: 25px;
-  border-radius: 50%;
-  border: solid 2px #ccc;
-}
-.landing__title {
-  font-family: 'Rubik', sans-serif;
-  /*text-transform: uppercase;*/
-  text-align: center;
-  margin-top: 100px;
-  margin-bottom: 100px;
-}
+
+
+// .landing__title {
+//   font-family: 'Rubik', sans-serif;
+//   text-align: center;
+//   margin-top: 100px;
+//   margin-bottom: 100px;
+// }
 
 .gallery__wrapper {
   background-color: #f6f6f7;
-  border-top: solid 2px #e1e1e1;
   min-height: 100vh;
 }
 
