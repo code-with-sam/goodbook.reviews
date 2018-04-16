@@ -1,0 +1,75 @@
+.gallery__wrapper {
+  background-color: #f6f6f7;
+  min-height: 100vh;
+}
+.gallery {
+  float: left;
+  width: 80%;
+}
+
+.gallery__title {
+  margin: 0 0 20px 20px ;
+}
+
+.review {
+  margin: 0 0 15px 0;
+  width: 33.33%;
+  float: left;
+  cursor: pointer;
+  transition: all 300ms ;
+  border: solid 2px transparent;
+  color: #212529;
+}
+
+.review:hover {
+  border-radius: 7px;
+  background-color: #fafafa;
+  border: solid 2px #ebebeb;
+  box-shadow: 0 0 30px rgba(0,0,0,0.1);
+}
+
+.review__background {
+  padding: 20px 6px 20px 20px;
+}
+
+.review__cover {
+  float: left;
+  width: 120px;
+  border-radius: 7px;
+  box-shadow: 0 0 35px rgba(0,0,0,0.35);
+  max-width: 40%;
+  height: 165px;
+}
+.review__content {
+  max-width: 60%;
+  float: left;
+  padding-left: 20px;
+}
+.review__book-title {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+.review__book-author {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  color: #868686;
+}
+.review__quote {
+  font-size: 0.8rem;
+  padding-right: 10px;
+}
+.review__title {
+  font-size: 1rem;
+}
+.review__author {
+  font-size: 0.65rem;
+}
+.review__rating {
+  font-size: 0.7rem;
+}
+.review__star {
+  float: left;
+  width: 17px;
+}

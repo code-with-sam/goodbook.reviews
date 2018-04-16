@@ -1,6 +1,6 @@
 // style imports via parcel
 import 'bootstrap/dist/css/bootstrap.css';
-import "../scss/style.scss"
+import "../scss/main.scss"
 
 // dependencies
 import showdown from 'showdown'
