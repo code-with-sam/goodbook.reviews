@@ -10,9 +10,7 @@ let expressSanitized = require('express-sanitize-escape');
 let util = require('./modules/util');
 
 let index = require('./routes/index');
-let user = require('./routes/user');
 let auth = require('./routes/auth');
-let feed = require('./routes/feed');
 let post = require('./routes/post');
 
 let config = require('./config')
@@ -43,7 +41,6 @@ app.use(util.setUser);
 app.use('/', index);
 app.use('/auth', auth);
 app.use('/logout', auth);
-app.use('/feed', feed);
 app.use('/post', post);
 app.use('/post/create-post', post);
 
