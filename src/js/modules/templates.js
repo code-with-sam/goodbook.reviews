@@ -1,10 +1,15 @@
-module.exports.postHeader = (post, profileImage, AuthorReputation, postTime) => {
+import showdown from 'showdown'
+import moment from 'moment'
+
+let converter = new showdown.Converter({ tables: true })
+
+module.exports.postHeader = (post, profileImage, AuthorReputation) => {
   return `
     <div class="single__meta-container clearfix">
       <img src="${profileImage}" class="single__profile-image" width="35" height="35" src="">
       <div class="single__meta">
         <h3 class="single__meta-author title is-2">@${post.author} <span class="single__reputation">${AuthorReputation}</span></h3>
-        <p class="single__datetime">${postTime} in ${post.parent_permlink}</p>
+        <p class="single__datetime">${moment(post.created).fromNow()} in ${post.parent_permlink}</p>
       </div>
       <div class="single__post-values">
         <span>${post.commentCount}<img src="/img/comment-icon.png"></span>
@@ -25,7 +30,8 @@ module.exports.postAside = (post, featureImageUrl, json) => {
     </div>
   `
 }
-module.exports.voteButton = (post) => {
+
+const voteButton = (post) => {
   return `
   <span class="review__upvote" data-permlink="${post.permlink}" data-permlink="${post.permlink}" data-author="${post.author}" data-post-id="${post.id}">
     <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -37,6 +43,8 @@ module.exports.voteButton = (post) => {
   </span>
   `
 }
+module.exports.voteButton = voteButton
+
 
 module.exports.commentBox = (post) => {
 return `

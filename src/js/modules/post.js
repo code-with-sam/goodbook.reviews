@@ -15,13 +15,12 @@ module.exports.appendSinglePost = (post, users)=> {
   let featureImageUrl = util.getFeatureImage(post)
   let profileImage = s.generateProfileImage(author)
   let AuthorReputation = steem.formatter.reputation(author.reputation)
-  let postTime = moment(post.created).fromNow();
   let json = util.getBookJson(post.json)
   // let tags = JSON.parse(post.json).tags.reduce( (all,tag) => all + `<span>${tag}</span>`, '') // will be generes
 
   html = html.replace(/img/, 'img class="review__content--first-image"');
   let aside = t.postAside(post, featureImageUrl, json)
-  let header = t.postHeader(post, profileImage, AuthorReputation, postTime)
+  let header = t.postHeader(post, profileImage, AuthorReputation)
   let voteButton = t.voteButton(post)
   let commentBox = t.commentBox(post)
 

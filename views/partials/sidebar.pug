@@ -1,45 +1,50 @@
+mixin item(title, url)
+  a(href=url)
+  a(href=url)
+    li.sidebar__list-item(class=feed == title ? 'is-active' : '')
+      img(src=`/img/${title}-icon.png`)
+      span=title
+
 aside.sidebar
   h2.sidebar__subtitle Discover
 
   ul.sidebar__list
-    a(href="/latest")
-      li.sidebar__list-item
-        img(src="/img/latest-icon.png")
-        span Latest
-    a(href="/featured")
-      li.sidebar__list-item
-        img(src="/img/featured-icon.png")
-        span Featured
-    a(href="/trending")
-      li.sidebar__list-item
-        img(src="/img/trending-icon.png")
-        span Trending
-    //- li.sidebar__list-item(data-filter="feed")
-    //-   img(src="/img/feed-icon.png")
-    //-   span Feed
+    +item('latest', '/latest')
+    +item('featured', '/featured')
+    +item('trending', '/trending')
+
+    if user
+      +item('feed', '/feed')
 
   hr.sidebar__divider
 
   h2.sidebar__subtitle Genres
   ul.sidebar__list
-    li.sidebar__list-item
-      img(src="/img/genre-fantasy-icon.png")
-      span Fantasy
-    li.sidebar__list-item
-      img(src="/img/genre-thriller-icon.png")
-      span Thriller
-    li.sidebar__list-item
-      img(src="/img/genre-science-fiction-icon.png")
-      span Science Fiction
-    li.sidebar__list-item
-      img(src="/img/genre-mystery-icon.png")
-      span Mystery
-    li.sidebar__list-item
-      img(src="/img/genre-sports-icon.png")
-      span Sports
-    li.sidebar__list-item
-      img(src="/img/genre-history-icon.png")
-      span Classics
-    li.sidebar__list-item
-      img(src="/img/genre-business-icon.png")
-      span Business
+    a(href='/genre/fantasy')
+      li.sidebar__list-item
+        img(src="/img/genre-fantasy-icon.png")
+        span Fantasy
+    a(href='/genre/thriller')
+      li.sidebar__list-item
+        img(src="/img/genre-thriller-icon.png")
+        span Thriller
+    a(href='/genre/science-fiction')
+      li.sidebar__list-item
+        img(src="/img/genre-science-fiction-icon.png")
+        span Science Fiction
+    a(href='/genre/mystery')
+      li.sidebar__list-item
+        img(src="/img/genre-mystery-icon.png")
+        span Mystery
+    a(href='/genre/sports')
+      li.sidebar__list-item
+        img(src="/img/genre-sports-icon.png")
+        span Sports
+    a(href='/genre/classics')
+      li.sidebar__list-item
+        img(src="/img/genre-history-icon.png")
+        span Classics
+    a(href='/genre/business')
+      li.sidebar__list-item
+        img(src="/img/genre-business-icon.png")
+        span Business

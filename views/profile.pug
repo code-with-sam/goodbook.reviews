@@ -3,8 +3,8 @@ extends layout
 block content
   include partials/nav
 
-  include partials/sidebar
-  main.gallery__wrapper.clearfix.feed.profile(data-feed-type=`${feed}` data-username=`${name}`)
+  main.gallery__wrapper.feed.profile(data-feed-type=`${feed}` data-username=`${name}`)
+    include partials/sidebar
 
-    section.gallery.clearfix.feed-insert
+    section.gallery.feed-insert
       .container

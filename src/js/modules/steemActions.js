@@ -1,8 +1,14 @@
+import showdown from 'showdown'
 import steem from 'steem'
+import $ from 'jquery'
+
 import feed from './feed'
 import post from './post'
 
 let allUsers = []
+let converter = new showdown.Converter({ tables: true })
+const APP_TAG = 'book-review' //goodbook-review
+
 const getTrending = (query, initial) => {
   steem.api.getDiscussionsByTrending(query, (err, result) => {
     console.log(result)
@@ -65,7 +71,11 @@ module.exports.getUserFeed = (username) => {
   }
   steem.api.getDiscussionsByFeed(query, (err, result) => {
     result = result.filter(data => data.parent_permlink === APP_TAG)
-    feed.displayContent(result)
+    if ( result.length > 0) {
+      feed.displayContent(result)
+    } else {
+      $('.feed-insert .container').append('<p>Looks like you\'re not following anyone who has posted a review yet 🤷‍♂️</p>')
+    }
   });
 }
 

@@ -1,5 +1,7 @@
 let express = require('express');
 let router = express.Router();
+let util = require('../modules/util');
+
 
 router.get('/', (req, res, next) =>  {
     res.redirect('/latest');
@@ -25,6 +27,24 @@ router.get('/trending', (req, res, next) =>  {
     feed: 'trending'
   });
 });
+
+router.get('/feed', util.isAuthenticated, (req, res, next) =>  {
+  res.render('feed', {
+    title: 'GoodBook.Reviews - Feed',
+    feed: 'feed',
+    username: req.session.steemconnect.name
+  });
+});
+
+router.get('/genre/:genre', (req, res, next) =>  {
+  let genre = req.params.genre
+
+  res.render('feed', {
+    title: `GoodBook.Reviews - ${genre}`,
+    feed: 'genre-${genre}'
+  });
+});
+
 
 router.get('/@:username', (req, res, next) => {
     let username = req.params.username

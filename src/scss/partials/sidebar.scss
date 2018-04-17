@@ -17,12 +17,16 @@
   list-style: none;
   padding: 0;
 }
+.sidebar__list a{
+  text-decoration: none;
+}
 .sidebar__list-item {
   color: #575757;
   margin: 2px 0;
   padding: 4px 4px 4px 32px;
   position: relative;
   font-size: 0.95rem;
+  text-transform: capitalize;
 }
 .sidebar__list-item img {
   width: 20px;
