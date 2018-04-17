@@ -252,12 +252,17 @@ function appendSinglePost(post, users){
     <hr>
   `
   let voteButton = `
-  <form method="post">
-    <input type="hidden" name="postId" value="${post.id}">
-    <input type="hidden" name="author" value="${post.author}">
-    <input type="hidden" name="permlink" value="${post.permlink}">
-    <input type="submit" class="vote" value="Vote">
-  </form>`
+<span class="review__upvote" data-permlink="${post.permlink}" data-permlink="${post.permlink}" data-author="${post.author}" data-post-id="${post.id}">
+    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+  viewBox="0 0 50 50" width="22px" height="22px">
+  <circle fill="transparent" stroke="#000000" stroke-width="3" strokemiterlimit="10" class="st0" cx="25" cy="25" r="23"/>
+  <line stroke="#000000" stroke-width="3" strokemiterlimit="10" class="st1" x1="13.6" y1="30.6" x2="26" y2="18.2"/>
+  <line stroke="#000000" stroke-width="3" strokemiterlimit="10" class="st2" x1="36.4" y1="30.6" x2="24" y2="18.2"/>
+  </svg>
+</span>
+`
+
+
   let commentBox = `
   <div>
     <textarea class="comment-message" rows="5"></textarea>
@@ -267,6 +272,24 @@ function appendSinglePost(post, users){
   $('.single__aside').append(aside)
   $('.single__content').append(header + html + voteButton + commentBox)
 }
+
+function addVoteTemplateAfter(dest) {
+      $('.vote-bar').remove()
+      let template = `<div class="vote-bar">
+      <span class="vote__btn">
+      <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+      viewBox="0 0 50 50" width="30px" height="30px">
+      <circle fill="transparent" stroke="#000000" stroke-width="3" strokemiterlimit="10" class="st0" cx="25" cy="25" r="23"/>
+      <line stroke="#000000" stroke-width="3" strokemiterlimit="10" class="st1" x1="13.6" y1="30.6" x2="26" y2="18.2"/>
+      <line stroke="#000000" stroke-width="3" strokemiterlimit="10" class="st2" x1="36.4" y1="30.6" x2="24" y2="18.2"/>
+      </svg>
+      </span>
+      <span class="vote__value">50%</span>
+      <input type="range" min="1" max="100" value="50" class="vote__slider" id="myRange">
+      <span class="vote__close" >&#43;</span>
+      </div>`
+      $(template).insertAfter(dest)
+    }
 
 function appendComments(posts) {
   $('.single__content').append('<div class="comments"></div>')
@@ -460,6 +483,34 @@ if ($('main').hasClass('profile') ) {
 }
 
 
+$('main').on('click', '.review__upvote', (e) => {
+  addVoteTemplateAfter('.review__upvote')
+})
+
+$('.single__wrapper').on('input', '.vote__slider', (e) => {
+  let weight = $('.vote__slider').val()
+  $('.vote__value').text(weight + '%')
+})
+
+$('.single__wrapper').on('click', '.vote__btn', (e) => {
+  let el = $(e.currentTarget)
+  let weight = $('.vote__slider').val() * 100
+  let permlink = el.parent().prev().data('permlink')
+  let author = el.parent().prev().data('author')
+  let postId = el.parent().prev().data('post-id')
+  sendVote(postId,author, permlink, weight)
+})
+
+function sendVote(postId, author, permlink, weight) {
+    $.post({
+      url: '/post/vote/',
+      dataType: 'json',
+      data: {postId, author, permlink, weight}
+    }, (response) => {
+      console.log(response)
+    })
+}
+
 $('main').on('click', '.vote',(e) => {
   let $voteButton = $(e.currentTarget)
   e.preventDefault()
@@ -475,6 +526,11 @@ $('main').on('click', '.vote',(e) => {
     }
   })
 })
+
+$('.single__wrapper').on('click', '.vote__close', (e) => {
+  $(e.currentTarget).parent().remove()
+});
+
 
 $('main').on('click', '.send-comment', (e) => {
   let $comment = $(e.currentTarget)

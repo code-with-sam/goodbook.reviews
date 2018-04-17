@@ -11,6 +11,7 @@ router.get('/', util.isAuthenticated, (req, res, next) => {
 });
 
 router.post('/create-post', util.isAuthenticated, (req, res) => {
+    steem.setAccessToken(req.session.access_token);
     let author = req.session.steemconnect.name
     let permlink = util.urlString()
     var tags = req.body.tags.split(',').map(item => item.trim());
@@ -42,12 +43,15 @@ router.post('/create-post', util.isAuthenticated, (req, res) => {
     });
 });
 
-router.post('/vote', util.isAuthenticated, (req, res) => {
+router.post('/vote', util.isAuthorized, (req, res) => {
+    steem.setAccessToken(req.session.access_token);
     let postId = req.body.postId
     let voter = req.session.steemconnect.name
     let author = req.body.author
     let permlink = req.body.permlink
-    let weight = 10000
+    let weight = parseInt(req.body.weight)
+
+    console.log(voter, author, permlink, weight)
 
     steem.vote(voter, author, permlink, weight, function (err, steemResponse) {
       if (err) {
@@ -59,8 +63,8 @@ router.post('/vote', util.isAuthenticated, (req, res) => {
 })
 
 
-router.post('/comment',  util.isAuthenticated, (req, res) => {
-
+router.post('/comment',  util.isAuthorized, (req, res) => {
+    steem.setAccessToken(req.session.access_token);
     let author = req.session.steemconnect.name
     let permlink = req.body.parentPermlink + '-' + util.urlString()
     let title = 'RE: ' + req.body.parentTitle
