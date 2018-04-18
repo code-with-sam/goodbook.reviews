@@ -4,10 +4,10 @@ import $ from 'jquery'
 
 import feed from './feed'
 import post from './post'
+import c from './constants'
 
 let allUsers = []
 let converter = new showdown.Converter({ tables: true })
-const APP_TAG = 'book-review' //goodbook-review
 
 const getTrending = (query, initial) => {
   steem.api.getDiscussionsByTrending(query, (err, result) => {
@@ -58,6 +58,7 @@ const getBlog = (username) => {
     limit: 10
   }
   steem.api.getDiscussionsByBlog(query, (err, result) => {
+      result = result.filter(data => data.parent_permlink === c.APP_TAG)
       feed.displayContent(result)
   })
 }
@@ -70,7 +71,7 @@ module.exports.getUserFeed = (username) => {
     limit: 20
   }
   steem.api.getDiscussionsByFeed(query, (err, result) => {
-    result = result.filter(data => data.parent_permlink === APP_TAG)
+    result = result.filter(data => data.parent_permlink === c.APP_TAG)
     if ( result.length > 0) {
       feed.displayContent(result)
     } else {
