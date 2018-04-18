@@ -15,7 +15,7 @@ router.post('/create-post', util.isAuthenticated, (req, res) => {
     let author = req.session.steemconnect.name
     let permlink = util.urlString()
     var tags = req.body.tags.split(',').map(item => item.trim());
-    let primaryTag = 'goodbook-test'
+    let primaryTag = 'goodbook-review'
     let otherTags = tags
     let title = req.body.title
     let body = req.body.post

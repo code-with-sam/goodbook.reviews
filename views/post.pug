@@ -11,7 +11,7 @@ block content
 
           .row
             .col-md-6
-              form.book-cover-form(action="" method="post" enctype="multipart/form-data" onsubmit="AJAXSubmit(this); return false;")
+              form.book-cover-form(action="" method="post" enctype="multipart/form-data")
                 fieldset.form-group
                   Label Upload Book Cover
                   input.form-control(type="hidden" name="upload_preset" value="ldzx8dne")
@@ -44,6 +44,8 @@ block content
                   option(value='4') 4
                   option(value='5') 5
               .col-md-12
+                  label(for='title')
+                    | Review
                   textarea.form-control(type="text" name="post")
               .col-md-6
                 label(for='tags')

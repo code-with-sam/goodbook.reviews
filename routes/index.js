@@ -50,7 +50,8 @@ router.get('/@:username', (req, res, next) => {
     let username = req.params.username
     res.render('profile', {
       name: username,
-      feed: 'trending'
+      feed: 'user',
+      auth: req.session.steemconnect ? true : false
     });
 });
 

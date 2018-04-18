@@ -19,3 +19,22 @@
   border: solid 2px #ccc;
   margin: 2px 10px;
 }
+
+.button--steemconnect {
+  padding: 4px 16px 4px 10px;
+  border: solid 1px #5aa9ed;
+  background-color: #5ab3ff;
+  color: #fff;
+  &:hover {
+    color: #fafafa;
+    text-decoration: none;
+    background-color: #5da1db;
+    border: solid 1px #5aa9ed;
+  }
+}
+.button--steemconnect img {
+  float: left;
+  width: 16px;
+  margin-right: 10px;
+  margin-top: 4px;
+}

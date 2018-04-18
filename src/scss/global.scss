@@ -30,4 +30,9 @@ img {
   background-color: #efefef;
   color: #5d5d5d;
   border-radius: 4px;
+
+  &:hover {
+    text-decoration: none;
+    color: #333;  
+  }
 }

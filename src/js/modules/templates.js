@@ -101,15 +101,19 @@ module.exports.comment = (post) => {
 
 module.exports.userProfile = (data) => {
   return `
-  <section class="user container">
-    <img class="user__image" src="${data.image}" width="100px">
-    <div class="user__meta">
-      <h3>${data.name} [${data.rep}]</h3>
-      <h5 class="user__stats">Followers: ${data.followerCount} | Following: ${data.followingCount} | Post Count: ${data.numOfPosts}</h5>
+  <section class="user">
+    <div class="container">
+      <img class="user__image" src="${data.image}" width="100px">
+      <div class="user__meta">
+        <h3>${data.name} [${data.rep}]</h3>
+        <h5 class="user__stats">Followers: ${data.followerCount} | Following: ${data.followingCount} | Post Count: ${data.numOfPosts}</h5>
 
-      <h5 class="user__vp">Vote Power: ${data.vp}%</h5>
+        <h5 class="user__vp">Vote Power: ${data.vp}%</h5>
+      </div>
+      <div class="user__actions">
+        <a href="/auth/logout">Log Out</a>
+      </div>
     </div>
-
   </section>
   `
 }

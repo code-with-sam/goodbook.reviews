@@ -50,6 +50,6 @@ module.exports.displayContent = (result, initial) => {
     }
   } else {
     $('.feed-insert .container').empty()
-    $('.feed-insert .container').append('<p>No Reviews in your personal feed to display 🙁</p>')
+    $('.feed-insert .container').append('<p>No Reviews to display 🙁</p>')
   }
 }

@@ -3,7 +3,7 @@ extends layout
 block content
   include partials/nav
 
-  main.gallery__wrapper.feed.profile(data-feed-type=`${feed}` data-username=`${name}`)
+  main.gallery__wrapper.feed.profile(data-feed-type=`${feed}` data-username=`${name}` class=auth == true ? 'auth' : '')
     include partials/sidebar
 
     section.gallery.feed-insert
