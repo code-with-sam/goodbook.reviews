@@ -39,7 +39,7 @@ router.post('/create-post', util.isAuthenticated, (req, res) => {
         } else {
           res.render('post', {
             name: req.session.steemconnect.name,
-            msg: 'Posted To Steem Network'
+            msg: '👍 Posted To Steem Network'
           })
         }
     });

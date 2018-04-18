@@ -40,8 +40,9 @@ if ($('main').hasClass('gallery__wrapper') ) {
   } else if(filter === 'feed'){
     s.getUserFeed(username)
   } else if(filter === 'latest'){
-    console.log( c.APP_TAG )
+    // console.log( c.APP_TAG )
     s.getLatest({'tag': c.APP_TAG, 'limit': 20 }, true)
+    // loadFeaturedTemplate()
   } else if(filter === 'featured'){
     loadBetaTemplate('The featured 🏆 section')
   } else if(filter === 'user'){

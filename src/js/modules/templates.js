@@ -48,7 +48,7 @@ module.exports.voteButton = voteButton
 
 module.exports.commentBox = (post) => {
 return `
-<div>
+<div class="comment__container">
   <textarea class="comment-message" rows="5"></textarea>
   <span class="send-comment" data-parent="${post.author}" data-parent-permlink="${post.permlink}" data-parent-title="${post.title}">Post Comment</span>
 </div>
@@ -93,8 +93,6 @@ module.exports.comment = (post) => {
       ${voteButton(post)}
       <span class="meta__divider">|</span>
       <span class="meta__votecount">${post.votes} ${voteMessage} </span>
-      <span class="meta__divider">|</span>
-      <span class="meta__reply">Reply</span>
     </div>
   </div>`
 }

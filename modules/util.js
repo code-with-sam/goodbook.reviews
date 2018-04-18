@@ -20,7 +20,7 @@ module.exports.isAuthorized = (req, res, next) => {
 
   res.json({
     status: 'fail',
-    message: 'Please sign in.'
+    msg: 'Please sign in.'
   })
 }
 

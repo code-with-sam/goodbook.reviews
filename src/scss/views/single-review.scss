@@ -94,6 +94,7 @@
   margin: 0 5px 0 0;
 }
 
+
 .comment {
   margin: 30px 0 15px;
 }
@@ -141,18 +142,22 @@
 .review__upvote svg {
   transform: translate(0,6px);
 }
-.comment-message {
+textarea.comment-message {
   margin-top: 20px;
+  min-height: 125px;
 }
 
+.comment__container {
+  @include clearfix;
+}
 
 .send-comment {
   cursor: pointer;
-  display: inline-block;
   border-radius: 3px;
-  padding: 10px;
+  padding: 4px 8px;
   border: solid 1px #7b7b7b;
-  margin: 20px 0 40px;
+  float: right;
+  margin: 0 0 10px;
 }
 
  blockquote {
