@@ -23,12 +23,15 @@ module.exports.displayContent = (result, initial) => {
         } else { return url }
       })
 
-      if( typeof JSON.parse(post.json_metadata).image === 'undefined' ){
+      let json = util.getBookJson(post.json_metadata)
+
+      if( json.cover ){
+        image = json.cover
+      } else if( typeof JSON.parse(post.json_metadata).image === 'undefined' ){
         image = util.genImageInHTML(post.body)
       } else {
         image = JSON.parse(post.json_metadata).image[0]
       }
-      let json = util.getBookJson(post.json_metadata)
 
       let itemTemplate = `
       <a href="/review/${post.parent_permlink}/${post.author}/${post.permlink}">

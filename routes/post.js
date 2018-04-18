@@ -24,7 +24,9 @@ router.post('/create-post', util.isAuthenticated, (req, res) => {
       book: req.body.book,
       author: req.body.author,
       rating: req.body.rating,
-      app: 'goodbook.reviews.app/v0.1.0'
+      app: 'goodbook.reviews.app/v0.1.0',
+      cover: req.body.cover,
+      image: [req.body.cover]
     }
 
     steem.comment('', primaryTag, author, permlink, title, body, customData, (err, steemResponse) => {

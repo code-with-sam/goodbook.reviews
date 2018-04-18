@@ -12,10 +12,10 @@ let converter = new showdown.Converter({ tables: true })
 module.exports.appendSinglePost = (post, users)=> {
   let author = users[post.author]
   let html = converter.makeHtml(post.body)
-  let featureImageUrl = util.getFeatureImage(post)
+  let json = util.getBookJson(post.json)
+  let featureImageUrl = json.cover || util.getFeatureImage(post)
   let profileImage = s.generateProfileImage(author)
   let AuthorReputation = steem.formatter.reputation(author.reputation)
-  let json = util.getBookJson(post.json)
   // let tags = JSON.parse(post.json).tags.reduce( (all,tag) => all + `<span>${tag}</span>`, '') // will be generes
 
   html = html.replace(/img/, 'img class="review__content--first-image"');

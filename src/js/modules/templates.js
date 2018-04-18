@@ -85,36 +85,31 @@ module.exports.comment = (post) => {
   data-post-depth="${post.depth}"
   class="comment comment-level-${post.depth} ${post.permlink}">
     <h4>
-      <a href="https://steemit.com/@${post.author}" target="_blank">@${post.author}</a>
-      <span> &middot; </span> <span> ${ post.created } </span>
+      <a class="comment__author-link" href="/@${post.author}" >@${post.author}</a>
+      <span class="comment__middot"> &middot; </span> <span class="comment__date"> ${ moment(post.created).fromNow() } </span>
     </h4>
-    <p>${ html }</p>
+    ${ html }
     <div class="meta">
-      <form method="post">
-        <input type="hidden" name="postId" value="${post.id}">
-        <input type="hidden" name="author" value="${post.author}">
-        <input type="hidden" name="permlink" value="${post.permlink}">
-        <input type="submit" class="vote" value="Vote">
-      </form>
-      <span class="sc-item__divider">|</span>
-      <span class="sc-item__votecount">${post.votes} ${voteMessage} </span>
-      <span class="sc-item__divider">|</span>
-      <span class="sc-item__reply">Reply</span>
+      ${voteButton(post)}
+      <span class="meta__divider">|</span>
+      <span class="meta__votecount">${post.votes} ${voteMessage} </span>
+      <span class="meta__divider">|</span>
+      <span class="meta__reply">Reply</span>
     </div>
   </div>`
 }
 
 module.exports.userProfile = (data) => {
-  return `<section class="profile">
-  <h2>${data.name} [${data.rep}]</h2>
-  <img src="${data.image}" width="100px">
-  <h5>Followers: ${data.followerCount}</h5>
-  <h5>Following: ${data.followingCount}</h5>
-  <h5>Effective Steem Power: ${data.effectiveSp}</h5>
-  <h5>Steem Power: ${data.sp}</h5>
-  <h5>STEEM: ${data.steem}</h5>
-  <h5>SBD: ${data.sbd}</h5>
-  <h5>Vote Power: ${data.vp}%</h5>
+  return `
+  <section class="user container">
+    <img class="user__image" src="${data.image}" width="100px">
+    <div class="user__meta">
+      <h3>${data.name} [${data.rep}]</h3>
+      <h5 class="user__stats">Followers: ${data.followerCount} | Following: ${data.followingCount} | Post Count: ${data.numOfPosts}</h5>
+
+      <h5 class="user__vp">Vote Power: ${data.vp}%</h5>
+    </div>
+
   </section>
   `
 }

@@ -139,3 +139,20 @@ $('main').on('click', '.send-comment', (e) => {
           $(`<p>${response.msg}</p>`).insertAfter($comment)
       })
 })
+
+
+window.ajaxSuccess = function () {
+	let response = JSON.parse(this.responseText);
+  console.log("ajaxSuccess", typeof this.responseText);
+  document.querySelector('.uploaded-book-cover').setAttribute('src', response['secure_url']);
+  $('.cover-url').val(response['secure_url'])
+}
+
+$('.book-cover-upload').change(function (){
+  let formElement = document.querySelector('.book-cover-form')
+  if (!formElement.action) { return; }
+  var xhr = new XMLHttpRequest();
+  xhr.onload = ajaxSuccess;
+  xhr.open("post", "https://api.cloudinary.com/v1_1/detot19ym/image/upload");
+  xhr.send(new FormData(formElement));
+});

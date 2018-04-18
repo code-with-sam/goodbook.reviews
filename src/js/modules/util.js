@@ -40,6 +40,7 @@ module.exports.getBookJson = (post_metadata) => {
       bookTitle,
       bookAuthor,
       rating,
-      ratingHTML
+      ratingHTML,
+      cover: json.cover
   }
 }
