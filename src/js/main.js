@@ -1,5 +1,4 @@
 // style imports via parcel
-import 'bootstrap/dist/css/bootstrap.css';
 import "../scss/main.scss"
 
 // dependencies
