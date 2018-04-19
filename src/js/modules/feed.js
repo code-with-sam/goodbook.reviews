@@ -7,7 +7,7 @@ let allContent = []
 let converter = new showdown.Converter({ tables: true })
 
 module.exports.displayContent = (result, initial) => {
-  if(initial && result.length > 1 || !initial && result.length > 0 ){
+  if(initial && result.length >= 1 || !initial && result.length > 0 ){
     if (!initial) result.shift()
     $('.feed-insert .container').empty()
     for (let i = 0; i < result.length ; i++) {
