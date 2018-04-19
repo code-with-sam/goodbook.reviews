@@ -13,3 +13,31 @@ module.exports.isAuthenticated = (req, res, next) => {
 
   res.redirect('/');
 }
+
+module.exports.isAuthorized = (req, res, next) => {
+  if (req.session.access_token)
+      return next();
+
+  res.json({
+    status: 'fail',
+    msg: 'Please sign in.'
+  })
+}
+
+module.exports.setUser = (req, res, next) => {
+  if(req.session.steemconnect){
+    let userMetadata = {};
+    if (req.session.steemconnect.json_metadata == '' || req.session.steemconnect.json_metadata === undefined) {
+      userMetadata.profile = { about: ''}
+    } else {
+      userMetadata = JSON.parse(req.session.steemconnect.json_metadata)
+    }
+
+    req.user = {
+      name: req.session.steemconnect.name,
+      profileImage: userMetadata.profile.profile_image
+    }
+    res.locals.user = req.user
+  }
+  next();
+}

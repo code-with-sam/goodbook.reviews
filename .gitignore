@@ -1,2 +1,5 @@
+.env
 node_modules/
-config.js
+dist/main.css
+dist/main.js
+dist/main.map

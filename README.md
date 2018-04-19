@@ -20,5 +20,14 @@ The aim of this project is to create a book review platform that is powered by s
 - open ```config.example.js``` and rename to ```config.js``` enter your ```client_id``` from steemconnect and redirect uri to 'http://localhost:3000/auth/', update the session secret to a new secure random string
 - npm install // to download dependencies
 - npm start // run the project on default port 3000
+
+
+## Compile SCSS & js via parcel
+```npm install -g parcel-bundler```
+
+```npm run dev``` - to watch for changes in src/ folder
+```npm run build``` - builds for prod
+
+
 - navigate to localhost:3000 in your browser
 - click on the blue 'login with steemconnect to authenticate your app'

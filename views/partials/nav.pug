@@ -8,15 +8,17 @@
 //-       a.nav-item.nav-link.btn.btn-outline-secondary(href="/post") Create Post
 //-       a.nav-item.nav-link(href="/dashboard") Profile
 //-       a.nav-item.nav-link(href="/auth/logout") Logout
-header
-  img.logo(src="/img/logo.svg")
 
-  //- a(href="").button.post-review Post a Review
-  if auth
-    .meta.clearfix
-      p= `@${name}`
-      img.profile(src=`${profileImage}`)
+header.gb-nav
+  a(href="/")
+    img.gb-nav__logo(src="/img/logo.svg")
+
+  if user
+    .gb-nav__meta.clearfix: a(href=`/@${user.name}`): img.gb-nav__profile-image(src=`${user.profileImage}`)
+    a(href="/post/create-post").button.post-review Post Review
 
   else
-    .meta.clearfix
-      a(href="/auth").button Login With SteemConnect
+    .gb-nav__meta.clearfix
+      a(href="/auth").button.button--steemconnect
+        span Login With SteemConnect
+        img(src="/img/steem.png")
