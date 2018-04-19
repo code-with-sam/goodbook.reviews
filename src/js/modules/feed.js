@@ -42,7 +42,7 @@ module.exports.displayContent = (result, initial) => {
       <h2 class="review__book-title">${json.bookTitle}</h2>
       <h2 class="review__book-author">${json.bookAuthor}</h2>
       <h4 class="review__rating">${json.ratingHTML}</h4>
-      <h3 class="review__quote">“${post.title}”</h3>
+      <h3 class="review__quote">“${json.quote}”</h3>
       <h4 class="review__author">Review By @${post.author}</h4></div>
       </div>
       </div>`

@@ -21,8 +21,11 @@ block content
 
           form(action="/post/create-post/" method="post")
             label(for='title')
-              | Post Title
+              | Post Title (Used outside of Goodbook.Reviews)
             input#title.form-control(type="text" name="title")
+            label(for='quote')
+              | Quote/Highlight/Title
+            input#title.form-control(type="text" name="quote")
             .row
               .col-md-4.mb-3
                 label(for='title')

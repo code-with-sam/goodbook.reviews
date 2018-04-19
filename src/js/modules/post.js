@@ -20,7 +20,7 @@ module.exports.appendSinglePost = (post, users)=> {
 
   html = html.replace(/img/, 'img class="review__content--first-image"');
   let aside = t.postAside(post, featureImageUrl, json)
-  let header = t.postHeader(post, profileImage, AuthorReputation)
+  let header = t.postHeader(post, profileImage, AuthorReputation, json)
   let voteButton = t.voteButton(post)
   let commentBox = t.commentBox(post)
 

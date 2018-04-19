@@ -34,6 +34,8 @@ module.exports.getBookJson = (post_metadata) => {
   let bookTitle = json.book || ''
   let bookAuthor = json.author || ''
   let rating = json.rating || ''
+  let quote = json.quote || ''
+  let cover = json.cover || ''
   let ratingHTML = '<img src="/img/star.png" class="review__star">'.repeat(rating) + '<img src="/img/star-empty.png" class="review__star">'.repeat(5-rating)
 
   return {
@@ -41,6 +43,7 @@ module.exports.getBookJson = (post_metadata) => {
       bookAuthor,
       rating,
       ratingHTML,
-      cover: json.cover
+      cover,
+      quote
   }
 }

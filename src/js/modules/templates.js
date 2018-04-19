@@ -3,7 +3,7 @@ import moment from 'moment'
 
 let converter = new showdown.Converter({ tables: true })
 
-module.exports.postHeader = (post, profileImage, AuthorReputation) => {
+module.exports.postHeader = (post, profileImage, AuthorReputation, json) => {
   return `
     <div class="single__meta-container clearfix">
       <img src="${profileImage}" class="single__profile-image" width="35" height="35" src="">
@@ -16,7 +16,7 @@ module.exports.postHeader = (post, profileImage, AuthorReputation) => {
         <span>${post.votes}<img src="/img/zap-icon.png"></span>
       </div>
     </div>
-    <h2 class="title">${post.title}</h2>
+    <h2 class="title">${json.quote}</h2>
     <hr>
   `
 }
