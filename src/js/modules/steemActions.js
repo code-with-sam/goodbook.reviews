@@ -59,7 +59,7 @@ const getBlog = (username) => {
   }
   steem.api.getDiscussionsByBlog(query, (err, result) => {
       result = result.filter(data => data.parent_permlink === c.APP_TAG)
-      feed.displayContent(result)
+      feed.displayContent(result, true)
   })
 }
 module.exports.getBlog = getBlog
