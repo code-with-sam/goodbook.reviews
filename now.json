@@ -1,0 +1,8 @@
+{
+  "alias": "goodbook.reviews",
+    "env": {
+    "SESSION_SECRET": "@session_secret_book",
+    "CLIENT_ID": "@client_id_book",
+    "REDIRECT_URI": "@redirect_uri_book"
+  }
+}
