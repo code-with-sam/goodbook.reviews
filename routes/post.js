@@ -17,7 +17,7 @@ router.post('/create-post', util.isAuthenticated, (req, res) => {
     var tags = req.body.tags.split(',').map(item => item.trim());
     let primaryTag = 'goodbook-review'
     let otherTags = tags
-    let title = req.body.title
+    let title = `${req.body.book} - ${req.body.author} - goodbook.reviews`
     let body = `<center>![${req.body.book} Book Cover](${req.body.cover})<ceter></br>` + req.body.post
     let customData = {
       tags: otherTags,

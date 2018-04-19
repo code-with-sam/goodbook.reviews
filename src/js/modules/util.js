@@ -37,6 +37,7 @@ module.exports.getBookJson = (post_metadata) => {
   let quote = json.quote || ''
   let cover = json.cover || ''
   let ratingHTML = '<img src="/img/star.png" class="review__star">'.repeat(rating) + '<img src="/img/star-empty.png" class="review__star">'.repeat(5-rating)
+  let tags = json.tags
 
   return {
       bookTitle,
@@ -44,6 +45,7 @@ module.exports.getBookJson = (post_metadata) => {
       rating,
       ratingHTML,
       cover,
-      quote
+      quote,
+      tags
   }
 }
