@@ -26,7 +26,7 @@ module.exports.getTrending = getTrending
 
 const getLatest = (query, initial) => {
   steem.api.getDiscussionsByCreated(query, (err, result) => {
-    console.log(err, result)
+    result = result.filter(post => post.author !== 'steemversary' )
     if (err === null) {
       feed.displayContent(result, initial)
       getaccounts(result.map(post => post.author))
