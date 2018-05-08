@@ -15,6 +15,7 @@ let index = require('./routes/index');
 let auth = require('./routes/auth');
 let post = require('./routes/post');
 let search = require('./routes/search');
+let reviews = require('./routes/reviews');
 
 let config = require('./config')
 
@@ -47,6 +48,7 @@ app.use('/logout', auth);
 app.use('/post', post);
 app.use('/post/create-post', post);
 app.use('/search', search);
+app.use('/reviews', reviews);
 
 
 // catch 404 and forward to error handler
