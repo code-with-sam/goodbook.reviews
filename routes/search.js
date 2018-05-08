@@ -1,6 +1,5 @@
 let express = require('express');
 let util = require('../modules/util');
-let steem = require('../modules/steemconnect')
 let router = express.Router();
 var books = require('google-books-search');
 
