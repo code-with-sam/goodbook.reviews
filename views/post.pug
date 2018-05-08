@@ -14,13 +14,13 @@ block content
             .col-md-6
               form.book-cover-form(action="" method="post" enctype="multipart/form-data")
                 fieldset.form-group
-                  Label Upload Book Cover (~300wx500h is a good size)
                   input.form-control(type="hidden" name="upload_preset" value="ldzx8dne")
-                  input.form-control.book-cover-upload.form-control-file(type="file" name="file")
+                  input.form-control.book-cover-upload.form-control-file(type="text" name="file" value="")
             .col-md-6
                 img(class="uploaded-book-cover" width="90px" src="http://placehold.it/100x140&text=cover")
 
           form(action="/post/create-post/" method="post")
+
             label(for='quote')
               | Quote/Highlight/Title
             input#title.form-control(type="text" name="quote")

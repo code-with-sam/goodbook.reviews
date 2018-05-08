@@ -70,9 +70,12 @@ if ($('main').hasClass('profile') ) {
 }
 
 $('.isbn-search').on('click', (e) => {
-  console.log(search)
   search.isbn('0307465357')
-    .then( data => console.log(data))
+    .then( data => {
+      console.log(data)
+      $('.book-cover-upload').val(data.results[0].thumbnail)
+      submitBookCoverToCloudinary()
+    })
 })
 
 $('main').on('click', '.review__upvote', (e) => {
@@ -150,11 +153,12 @@ window.ajaxSuccess = function () {
   $('.cover-url').val(response['secure_url'])
 }
 
-$('.book-cover-upload').change(function (){
+function submitBookCoverToCloudinary(){
   let formElement = document.querySelector('.book-cover-form')
   if (!formElement.action) { return; }
+  console.log(formElement)
   var xhr = new XMLHttpRequest();
   xhr.onload = ajaxSuccess;
   xhr.open("post", "https://api.cloudinary.com/v1_1/detot19ym/image/upload");
   xhr.send(new FormData(formElement));
-});
+}
