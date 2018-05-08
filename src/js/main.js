@@ -70,11 +70,13 @@ if ($('main').hasClass('profile') ) {
 }
 
 $('.isbn-search').on('click', (e) => {
-  search.isbn('0307465357')
+  let isbnNumber = $('.isbn-input').val()
+  console.log(isbnNumber)
+  search.isbn(isbnNumber)
     .then( data => {
       console.log(data)
-      $('.book-cover-upload').val(data.results[0].thumbnail)
-      submitBookCoverToCloudinary()
+      submitBookCoverToCloudinary(data.results[0].thumbnail)
+      autoFillBookFormData(data.results[0])
     })
 })
 
@@ -153,12 +155,17 @@ window.ajaxSuccess = function () {
   $('.cover-url').val(response['secure_url'])
 }
 
-function submitBookCoverToCloudinary(){
+function submitBookCoverToCloudinary(cover){
+  $('.book-cover-upload').val(cover)
   let formElement = document.querySelector('.book-cover-form')
   if (!formElement.action) { return; }
-  console.log(formElement)
   var xhr = new XMLHttpRequest();
   xhr.onload = ajaxSuccess;
-  xhr.open("post", "https://api.cloudinary.com/v1_1/detot19ym/image/upload");
+  xhr.open('post', 'https://api.cloudinary.com/v1_1/detot19ym/image/upload');
   xhr.send(new FormData(formElement));
+}
+
+function autoFillBookFormData(data){
+  $('input#title').val(data.title)
+  $('input#author').val(data.authors.join(', '))
 }

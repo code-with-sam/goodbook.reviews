@@ -23,7 +23,7 @@ router.post('/create-post', util.isAuthenticated, (req, res) => {
       tags: otherTags,
       quote: req.body.quote,
       book: req.body.book,
-      author: req.body.author,
+      author: req.body.author.spit(', '),
       rating: req.body.rating,
       app: 'book.reviews.appv0.2.0',
       cover: req.body.cover,
