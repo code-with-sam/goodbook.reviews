@@ -39,7 +39,7 @@ if ($('main').hasClass('gallery__wrapper') ) {
   } else if(filter === 'feed'){
     s.getUserFeed(username)
   } else if(filter === 'latest'){
-    $.getJSON( '/reviews', data => feed.displayContentDd(data.reviews) );
+    $.getJSON( '/reviews', data => feed.displayContentDd(data.reviews.reverse()) );
   } else if(filter === 'featured'){
     loadBetaTemplate('The featured 🏆 section')
   } else if(filter === 'user'){
