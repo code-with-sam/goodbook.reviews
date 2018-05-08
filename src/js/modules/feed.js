@@ -64,6 +64,7 @@ module.exports.displayContentDd = (result) => {
           return '<img src="' + url + '">';
         } else { return url }
       })
+      let ratingHTML = '<img src="/img/star.png" class="review__star">'.repeat(post.rating) + '<img src="/img/star-empty.png" class="review__star">'.repeat(5-post.rating)
 
       let itemTemplate = `
       <a href="/review/${post.primaryTag}/${post.author}/${post.permlink}">
@@ -73,7 +74,7 @@ module.exports.displayContentDd = (result) => {
       <div class="review__content">
       <h2 class="review__book-title">${post.bookTitle}</h2>
       <h2 class="review__book-author">${post.bookAuthors}</h2>
-      <h4 class="review__rating">${post.rating}</h4>
+      <h4 class="review__rating">${ratingHTML}</h4>
       <h3 class="review__quote">“${post.quote}”</h3>
       <h4 class="review__author">Review By @${post.author}</h4></div>
       </div>
