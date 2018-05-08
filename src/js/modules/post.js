@@ -7,7 +7,7 @@ import * as t from './templates'
 import util from './util'
 import s from './steemActions'
 
-let converter = new showdown.Converter({ tables: true })
+let converter = new showdown.Converter({ tables: true, strikethrough: true })
 
 module.exports.appendSinglePost = (post, users)=> {
   let author = users[post.author]
