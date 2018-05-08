@@ -31,6 +31,20 @@ router.post('/create-post', util.isAuthenticated, (req, res) => {
       image: [req.body.cover]
     }
 
+    var review = new Review({
+      author: author,
+      permlink: permlink,
+      primaryTag: primaryTag,
+      tags: tags,
+      body: body,
+      bookTitle: req.body.book,
+      bookAuthors: req.body.author.split(', '),
+      rating: req.body.rating,
+      ISBN: req.body.isbn,
+      coverImageUrl: req.body.cover,
+      quote: req.body.quote
+    });
+
     steem.comment('', primaryTag, author, permlink, title, body, customData, (err, steemResponse) => {
         if (err) {
           console.log(err)
@@ -39,6 +53,9 @@ router.post('/create-post', util.isAuthenticated, (req, res) => {
             msg: `Error - ${err}`
           })
         } else {
+          review.save( (err) => {
+            if (err) return console.log(err);
+          });
           res.render('post', {
             name: req.session.steemconnect.name,
             msg: '👍 Posted To Steem Network'
