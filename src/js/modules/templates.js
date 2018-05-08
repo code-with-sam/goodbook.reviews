@@ -8,7 +8,7 @@ module.exports.postHeader = (post, profileImage, AuthorReputation, json) => {
   tag = tag.length > 0 ? tag[1] : tag[0]
   return `
     <div class="single__meta-container clearfix">
-      <img src="${profileImage}" class="single__profile-image" width="35" height="35" src="">
+      <img src="${profileImage}" class="single__profile-image" width="35" height="35"  onerror="this.src='/img/default-user.jpg'" >
       <div class="single__meta">
         <h3 class="single__meta-author title is-2">@${post.author} <span class="single__reputation">${AuthorReputation}</span></h3>
         <p class="single__datetime">${moment(post.created).fromNow()} in ${tag}</p>
