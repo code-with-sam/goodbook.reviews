@@ -53,3 +53,31 @@ module.exports.displayContent = (result, initial) => {
     $('.feed-insert .container').append('<p>No Reviews to display 🙁</p>')
   }
 }
+
+module.exports.displayContentDd = (result) => {
+    for (let i = 0; i < result.length ; i++) {
+      let post = result[i];
+      var urlRegex = /(https?:\/\/[^\s]+)/g;
+      post.body = post.body.replace(urlRegex, (url) => {
+        let last = url.slice(-3)
+        if ( last === 'jpg' || last === 'png' || last === 'jpe' || last === 'gif' )  {
+          return '<img src="' + url + '">';
+        } else { return url }
+      })
+
+      let itemTemplate = `
+      <a href="/review/${post.primaryTag}/${post.author}/${post.permlink}">
+      <div class="review"" data-url="${post.primaryTag}/${post.author}/${post.permlink}" data-permlink="${ post.permlink }">
+      <div class="review__background">
+      <img class="review__cover" src="${post.coverImageUrl}" onerror="this.src='http://placehold.it/200x300'">
+      <div class="review__content">
+      <h2 class="review__book-title">${post.bookTitle}</h2>
+      <h2 class="review__book-author">${post.bookAuthors}</h2>
+      <h4 class="review__rating">${post.rating}</h4>
+      <h3 class="review__quote">“${post.quote}”</h3>
+      <h4 class="review__author">Review By @${post.author}</h4></div>
+      </div>
+      </div>`
+      $('.feed-insert .container').append(itemTemplate)
+    }
+}
