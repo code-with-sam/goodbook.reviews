@@ -21,6 +21,7 @@ block content
 
           form(action="/post/create-post/" method="post")
             .row
+              input.isbn-formfield--hidden(type="hidden" name="isbn" )
               .col-md-4.mb-3
                 label(for='title')
                   | Book Title

@@ -79,8 +79,7 @@ $('.isbn-search').on('click', (e) => {
   console.log('ISBN input: ', isbnNumber)
   search.isbn(isbnNumber)
     .then( data => {
-      console.log('data: ', data)
-
+      $('.isbn-formfield--hidden').val(isbnNumber)
       if (data.results[0].thumbnail) {
         $('.book-cover-upload').val(data.results[0].thumbnail)
         submitBookCoverToCloudinary(data.results[0].thumbnail)
