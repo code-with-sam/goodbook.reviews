@@ -69,6 +69,30 @@ if ($('main').hasClass('profile') ) {
   })
 }
 
+$('form').on('change', '.book-cover-upload--manual', () => {
+  submitBookCoverToCloudinary()
+})
+
+$('.isbn-search').on('click', (e) => {
+  $('.search--error').remove()
+  let isbnNumber = $('.isbn-input').val()
+  console.log('ISBN input: ', isbnNumber)
+  search.isbn(isbnNumber)
+    .then( data => {
+      $('.isbn-formfield--hidden').val(isbnNumber)
+      if (data.results[0].thumbnail) {
+        $('.book-cover-upload').val(data.results[0].thumbnail)
+        submitBookCoverToCloudinary(data.results[0].thumbnail)
+      } else {
+        showManualBookCoverForm()
+      }
+      autoFillBookFormData(data.results[0])
+    })
+    .catch( data => {
+      console.log(data)
+      displayISBNSearchError(data)
+    })
+})
 
 $('main').on('click', '.review__upvote', (e) => {
   post.addVoteTemplateAfter(e.currentTarget)
@@ -145,11 +169,31 @@ window.ajaxSuccess = function () {
   $('.cover-url').val(response['secure_url'])
 }
 
-$('.book-cover-upload').change(function (){
+function submitBookCoverToCloudinary(){
   let formElement = document.querySelector('.book-cover-form')
   if (!formElement.action) { return; }
   var xhr = new XMLHttpRequest();
   xhr.onload = ajaxSuccess;
-  xhr.open("post", "https://api.cloudinary.com/v1_1/detot19ym/image/upload");
+  xhr.open('post', 'https://api.cloudinary.com/v1_1/detot19ym/image/upload');
   xhr.send(new FormData(formElement));
-});
+}
+
+function showManualBookCoverForm(){
+  $('.notification, .book-cover-upload--manual, .book-cover-upload').remove()
+  let template = `
+  <input type="file" name="file" value="" class="form-control book-cover-upload--manual form-control-file">
+  <p class="notification">A cover photo could not be found please upload one. Recommended dimensions ~300wx500h</p>
+  `
+  $('.book-cover-form').prepend(template)
+}
+
+function autoFillBookFormData(data){
+  $('input#title').val(data.title)
+  $('input#author').val(data.authors.join(', '))
+}
+
+function displayISBNSearchError(data){
+  $('.search--error').remove()
+  let template = `<div class="error search--error">${data.error}<div>`
+  $(template).insertAfter('.isbn-search')
+}

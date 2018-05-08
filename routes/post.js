@@ -20,10 +20,11 @@ router.post('/create-post', util.isAuthenticated, (req, res) => {
     let title = `${req.body.book} - ${req.body.author} - goodbook.reviews`
     let body = `<center>![${req.body.book} Book Cover](${req.body.cover})</center></br>` + req.body.post
     let customData = {
+      isbn: req.body.isbn,
       tags: otherTags,
       quote: req.body.quote,
       book: req.body.book,
-      author: req.body.author,
+      author: req.body.author.split(', '),
       rating: req.body.rating,
       app: 'book.reviews.appv0.2.0',
       cover: req.body.cover,

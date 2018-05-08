@@ -7,31 +7,29 @@ block content
     .container
       .row
         .col-md-8.offset-md-2
-          h2 Create Post
-
+          h2 Book Review
           .row
+            .col-md-6
+              input#isbn.form-control.isbn-input(type="text" name="isbn")
+              button.btn.btn-primary.isbn-search Search ISBN
             .col-md-6
               form.book-cover-form(action="" method="post" enctype="multipart/form-data")
                 fieldset.form-group
-                  Label Upload Book Cover (~300wx500h is a good size)
                   input.form-control(type="hidden" name="upload_preset" value="ldzx8dne")
-                  input.form-control.book-cover-upload.form-control-file(type="file" name="file")
-            .col-md-6
-                img(class="uploaded-book-cover" width="90px" src="http://placehold.it/100x140&text=cover")
+                  input.form-control.book-cover-upload.form-control-file(type="hidden" name="file" value="")
+                  img(class="uploaded-book-cover" width="90px" src="http://placehold.it/100x140&text=cover")
 
           form(action="/post/create-post/" method="post")
-            label(for='quote')
-              | Quote/Highlight/Title
-            input#title.form-control(type="text" name="quote")
             .row
+              input.isbn-formfield--hidden(type="hidden" name="isbn" )
               .col-md-4.mb-3
                 label(for='title')
                   | Book Title
-                input#title.form-control(type="text" name="book")
+                input#title.form-control(type="text" name="book" readonly)
               .col-md-4.mb-3
                 label(for='title')
                   | Book Author
-                input#title.form-control(type="text" name="author")
+                input#author.form-control(type="text" name="author" readonly)
               .col-md-4.mb-3
                 label(for='rating')
                   | Book Rating
@@ -44,13 +42,17 @@ block content
                   option(value='4') 4
                   option(value='5') 5
               .col-md-12
-                  label(for='title')
-                    | Review
+                  label(for='quote')
+                    | Short Quote/Highlight
+                  input#quote.form-control(type="text" name="quote")
+              .col-md-12
+                  label(for='post')
+                    | Review Content
                   textarea.form-control(type="text" name="post")
-              .col-md-6
+              .col-md-8
                 label(for='tags')
                   | Tags & Genres (comma seperated) - specify genre e.g (genre-fantasy, genre-scifi, genre-sports)
-                input#title.form-control(type="text" name="tags")
+                input#tags.form-control(type="text" name="tags")
               input.cover-url(type="hidden" name="cover")
 
             button.btn.btn-primary.btn-lg.btn-block(type='submit') Submit Post
