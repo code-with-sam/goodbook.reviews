@@ -26,7 +26,7 @@ router.post('/create-post', util.isAuthenticated, (req, res) => {
       book: req.body.book,
       author: req.body.author.split(', '),
       rating: req.body.rating,
-      app: 'book.reviews.appv0.4.0',
+      app: 'book.reviews.appv0.4.1',
       cover: req.body.cover,
       image: [req.body.cover]
     }

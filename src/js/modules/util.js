@@ -12,6 +12,7 @@ const genImageInHTML = (markdown) => {
       return false
     }
 }
+module.exports.genImageInHTML = genImageInHTML
 
 module.exports.getFeatureImage = (post) => {
   let image;
@@ -22,8 +23,6 @@ module.exports.getFeatureImage = (post) => {
   }
   return image
 }
-
-module.exports.genImageInHTML = genImageInHTML
 
 module.exports.getBookJson = (post_metadata) => {
   let json = {};
