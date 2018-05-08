@@ -70,13 +70,15 @@ if ($('main').hasClass('profile') ) {
 }
 
 $('.isbn-search').on('click', (e) => {
+  $('.search--error').remove()
   let isbnNumber = $('.isbn-input').val()
-  console.log(isbnNumber)
   search.isbn(isbnNumber)
     .then( data => {
-      console.log(data)
       submitBookCoverToCloudinary(data.results[0].thumbnail)
       autoFillBookFormData(data.results[0])
+    })
+    .catch( data => {
+      displayISBNSearchError(data)
     })
 })
 
@@ -168,4 +170,10 @@ function submitBookCoverToCloudinary(cover){
 function autoFillBookFormData(data){
   $('input#title').val(data.title)
   $('input#author').val(data.authors.join(', '))
+}
+
+function displayISBNSearchError(data){
+  $('.search--error').remove()
+  let template = `<div class="error search--error">${data.error}<div>`
+  $(template).insertAfter('.isbn-search')
 }

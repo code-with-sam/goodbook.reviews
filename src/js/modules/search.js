@@ -6,6 +6,12 @@ module.exports.isbn = (isbn) => {
       url: '/search/isbn/',
       dataType: 'json',
       data: {isbn}
-    }, (response) => { resolve(response) })
+    }, (response) => {
+      if (response.error) {
+        reject(response)
+      } else {
+        resolve(response)
+      }
+    })
   });
 }
