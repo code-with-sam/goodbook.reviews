@@ -69,6 +69,11 @@ if ($('main').hasClass('profile') ) {
   })
 }
 
+$('.isbn-search').on('click', (e) => {
+  console.log(search)
+  search.isbn('0307465357')
+    .then( data => console.log(data))
+})
 
 $('main').on('click', '.review__upvote', (e) => {
   post.addVoteTemplateAfter(e.currentTarget)
