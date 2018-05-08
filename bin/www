@@ -8,6 +8,7 @@ let app = require('../app');
 let debug = require('debug')('boilerplate:server');
 let http = require('http');
 let config = require('../config');
+let mongoose = require('mongoose');
 
 /**
  * Get port from environment and store in Express.
@@ -21,14 +22,28 @@ app.set('port', port);
  */
 
 let server = http.createServer(app);
+var mongoDB = `mongodb://${process.env.GOODBOOKS_DATABASE_USER}:${process.env.GOODBOOKS_DATABASE_PASSWORD}@ds119090.mlab.com:19090/goodbooks`;
 
 /**
- * Listen on provided port, on all network interfaces.
+ * OPEN Database & Listen on provided port, on all network interfaces.
  */
+mongoose.connect(mongoDB).then(
+ () => {
+   console.log('CONNECTED TO DATABASE')
+   server.listen(port);
+   server.on('error', onError);
+   server.on('listening', onListening);
+ },
+ err => {
+   console.log('ERROR CONNECTING TO DATABASE', err)
+ }
+);
 
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
+mongoose.Promise = global.Promise;
+var db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
 
 /**
  * Normalize a port into a number, string, or false.

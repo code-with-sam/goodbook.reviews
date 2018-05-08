@@ -2,7 +2,7 @@ let express = require('express');
 let util = require('../modules/util');
 let steem = require('../modules/steemconnect')
 let router = express.Router();
-
+let Review = require('../models/review')
 
 router.get('/', util.isAuthenticated, (req, res, next) => {
     res.render('post', {
@@ -26,10 +26,24 @@ router.post('/create-post', util.isAuthenticated, (req, res) => {
       book: req.body.book,
       author: req.body.author.split(', '),
       rating: req.body.rating,
-      app: 'book.reviews.appv0.2.0',
+      app: 'book.reviews.appv0.4.0',
       cover: req.body.cover,
       image: [req.body.cover]
     }
+
+    var review = new Review({
+      author: author,
+      permlink: permlink,
+      primaryTag: primaryTag,
+      tags: tags,
+      body: body,
+      bookTitle: req.body.book,
+      bookAuthors: req.body.author.split(', '),
+      rating: req.body.rating,
+      ISBN: req.body.isbn,
+      coverImageUrl: req.body.cover,
+      quote: req.body.quote
+    });
 
     steem.comment('', primaryTag, author, permlink, title, body, customData, (err, steemResponse) => {
         if (err) {
@@ -39,6 +53,9 @@ router.post('/create-post', util.isAuthenticated, (req, res) => {
             msg: `Error - ${err}`
           })
         } else {
+          review.save( (err) => {
+            if (err) return console.log(err);
+          });
           res.render('post', {
             name: req.session.steemconnect.name,
             msg: '👍 Posted To Steem Network'
